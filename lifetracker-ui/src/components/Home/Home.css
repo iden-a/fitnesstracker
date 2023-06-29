@@ -1,6 +1,37 @@
-.tiles {
+/* .tiles {
   display: flex;
   align-items: center;
   width: 100%;
   gap: 20px;
+} */
+
+.home {
+ justify-content: space-around;
+  display: flex;
+  
+  
 }
+.tiles{
+  display: flex;
+  justify-content: space-around;
+  padding: 90px;
+}
+
+.tracker img{
+  border-radius: 20px;
+  height: 400px;
+  width: 600px;
+}
+
+.tile img{
+ display: flex;
+ height: 320px;
+ width: 300px;
+ border-radius: 40px;
+ 
+} 
+.tile img:hover{
+  -moz-box-shadow: 0 0 10px blue;
+  -webkit-box-shadow: 0 0 10px blue;
+  box-shadow: 0 0 10px blue;}
+     
