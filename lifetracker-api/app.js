@@ -6,14 +6,29 @@ const pool = require('./database')
 
 const app = express ()
 
+//middleware
 app.use(cors())
+app.use(morgan('tiny'))
+app.use(express.json()) // req.body 
 
 app.get('/', (req, res) => {
-    res.send({ping: 'pong'})
+    res.send({name: 'iden'})
 })
 
-app.use(morgan('tiny'))
-app.use(express.json())
+app.post('/register', (req, res) => {
+    res.send({name: 'iden'})
+})
+
+
+
+//ROUTES
+
+
+//Register a user , create a user 
+
+//Allow a user to log in
+
+
 
 const PORT = process.env.port || 3001
 

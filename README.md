@@ -55,7 +55,7 @@ Implement any of the following features to improve the application:
 #### The `App` Component
 
 - [ ] Build the `App` component to:
-  - [ ] Be wrapped by an element with the class name of `app`
+  - [X] Be wrapped by an element with the class name of `app`
   - [ ] Contain the routes for the app
   - [ ] Render the `Navbar` component on every route
   - [ ] Render a `BrowserRouter` component that contains a `Routes` component with the following routes:
@@ -359,11 +359,11 @@ Here are the pieces of functionality that should be built out for the backend:
 
 - [ ] **Project setup**
   - [ ] First things first, bootstrap the Express application with some essential files and starter code
-  - [ ] Create a `.gitignore` file, an `app.js` file, an `app.test.js` file, and a `server.js` file
-  - [ ] Make sure `node_modules` are added to the `.gitignore` file.
-  - [ ] Add dependencies for `express@next`, `morgan`, `cors`, and `nodemon`
-  - [ ] Install new dependencies for `bcrypt`, `jsonwebtoken`, `colors`, `dotenv`, `pg`
-  - [ ] Commit all work to `git`
+  - [X] Create a `.gitignore` file, an `app.js` file, an `app.test.js` file, and a `server.js` file
+  - [X] Make sure `node_modules` are added to the `.gitignore` file.
+  - [X] Add dependencies for `express@next`, `morgan`, `cors`, and `nodemon`
+  - [X] Install new dependencies for `bcrypt`, `jsonwebtoken`, `colors`, `dotenv`, `pg`
+  - [X] Commit all work to `git`
   - [ ] Add a `.env` file to the root of the repo and include the following environment variables
     - [ ] `PORT` (default to `3001`)
     - [ ] `SECRET_KEY` (set to a long random string)

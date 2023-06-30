@@ -2,6 +2,7 @@ import * as React from "react";
 import "./Register.css";
 import { useState } from "react";
 
+
 export default function Register() {
   const [userInfo, setUserInfo] = useState({
     email: "",
@@ -9,47 +10,80 @@ export default function Register() {
     firstname: "",
     lastname: "",
     password: "",
+    confirmpassword: ""
   });
+  const [errors, setErrors] = useState({})
+  const[isLoading, setIsLoading] = useState(false)
 
-  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleConfirmPassword = (event) => {
-    setConfirmPassword(event.target.value);
-  };
 
+  const handleOnInputChange = (event) => {
+    if (event.target.name === "password") { console.log("yes")
+      if (userInfo.confirmpassword && userInfo.confirmpassword !== event.target.value) {
+        setErrors((e) => ({ ...e, confirmPassword: "Passwords do not match" }))
+      } else {
+        setErrors((e) => ({ ...e, confirmPassword: null }))
+      }
+    }
+    if (event.target.name === "confirmpassword") {
+      if (userInfo.password && userInfo.password !== event.target.value) {
+        console.log("no")
+        setErrors((e) => ({ ...e, confirmPassword: "Passwords do not match" }))
+      } else {
+        console.log("two")
+        setErrors((e) => ({ ...e, confirmPassword: null }))
+      }
+    }
+    if (event.target.name === "email") {
+      if (event.target.value.indexOf("@") === -1) {
+        setErrors((e) => ({ ...e, email: "Please enter a valid email." }))
+      } else {
+        setErrors((e) => ({ ...e, email: null }))
+      }
+    }
+
+    setUserInfo((prevState) => ({ ...prevState, [event.target.name]: event.target.value }))
+  }
+
+  const handleOnSubmit = async () => {
+    setIsLoading(true)
+    setErrors((e) => ({...e, form:null}))
+ console.log('anything')
+
+  if (userInfo.confirmpassword !== userInfo.password) {
+    setErrors((e) => ({ ...e, passwordConfirm: "Passwords do not match." }))
+    setIsLoading(false)
+    return
+  } else {
+    setErrors((e) => ({ ...e, passwordConfirm: null }))
+  }
+
+}
   return (
     <>
       <h2 style={{ textAlign: "center", fontSize: "40px" }}>
         Create an Account
       </h2>
 
-      <div className="register-container">
+      <div className="form">
         <div className="input-field">
-          <label htmlFor="email">Email</label>
-          <input
+          <label htmlFor="email"></label>
+          <input className="input" style={{fontSize:"20px"}}
             value={userInfo.email}
-            onChange={(e) =>
-              setUserInfo((prevState) => ({
-                ...prevState,
-                email: e.target.value,
-              }))
-            }
+            onChange={handleOnInputChange}
             type="email"
             name="email"
             placeholder="Email"
           />
+        {errors.email && <span className="error">{errors.email}</span>}
         </div>
 
+
         <div className="input-field">
-          <label htmlFor="username">Username</label>
-          <input
+          <label htmlFor="username"></label>
+          <input className="input" style={{fontSize:"20px"}}
             value={userInfo.username}
-            onChange={(e) =>
-              setUserInfo((prevState) => ({
-                ...prevState,
-                username: e.target.value,
-              }))
-            }
+            onChange={handleOnInputChange}
             type="text"
             name="username"
             placeholder="Username"
@@ -57,67 +91,55 @@ export default function Register() {
         </div>
 
         <div className="input-field">
-          <label htmlFor="firstname">First Name</label>
-          <input
+          <label htmlFor="firstname"></label>
+          <input className="input" style={{fontSize:"20px"}}
             value={userInfo.firstname}
-            onChange={(e) =>
-              setUserInfo((prevState) => ({
-                ...prevState,
-                firstname: e.target.value,
-              }))
-            }
+            onChange={handleOnInputChange}
             type="text"
             name="firstname"
-            placeholder="First name"
+            placeholder="First Name"
           />
         </div>
 
         <div className="input-field">
-          <label htmlFor="lastname">Last Name</label>
-          <input
+          <label htmlFor="lastname"></label>
+          <input className="input" style={{fontSize:"20px"}}
             value={userInfo.lastname}
-            onChange={(e) =>
-              setUserInfo((prevState) => ({
-                ...prevState,
-                lastname: e.target.value,
-              }))
-            }
+            onChange={handleOnInputChange}
             type="text"
             name="lastname"
-            placeholder="Last name"
+            placeholder="Last Name"
           />
         </div>
 
         <div className="input-field">
-          <label htmlFor="password">Password</label>
-          <input
+          <span style={{}}>
+          <label htmlFor="password" ></label>
+          <input className="input" style={{fontSize:"20px"}}
             value={userInfo.password}
-            onChange={(e) =>
-              setUserInfo((prevState) => ({
-                ...prevState,
-                password: e.target.value,
-              }))
-            }
+            onChange={handleOnInputChange}
             type="password"
             name="password"
             placeholder="Password"
           />
+          </span>
         </div>
 
         <div className="input-field">
-          <label htmlFor="confirm-password">Confirm Password</label>
-          <input
-            value={confirmPassword}
-            onChange={handleConfirmPassword}
+          <label htmlFor="confirmpassword"></label>
+          <input className="input" style={{fontSize:"20px"}}
+            value={userInfo.confirmpassword}
+            onChange={handleOnInputChange}
             type="password"
-            name="confirm-password"
+            name="confirmpassword"
             placeholder="Confirm Password"
           />
+           {errors.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
         </div>
-        <div id="signup-btn">
-          <button>Sign Up</button>
-        </div>
-        <p style={{ textAlign: "center" }}>Have an Account? Login</p>
+        
+          <button id="signup-btn" onClick={handleOnSubmit}>Sign Up</button>
+        
+        <p style={{ textAlign: "center", fontSize:"20px"}}>Have an Account? Login</p>
       </div>
     </>
   );

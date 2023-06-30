@@ -19,8 +19,8 @@ a {
 }
 
 #logo {
-  width: 70px;
-  height: 80px;
+  width: 150px;
+  height: 100px;
   margin-left: 170px;
 }
 
@@ -28,6 +28,9 @@ a {
 border-radius: 10px;
 width: 90px;
 height: 30px;
+background-color:  #0066b2;
+border: none;
+font-size: 15px;
 
 }
 

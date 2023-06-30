@@ -15,7 +15,7 @@ export default function Home() {
     
         <div className="title">
           <h1 style={{fontSize: '70px'}}> Get Into it!</h1>
-          <h3 style={{fontSize: '30px'}}> Helping you get to the bag, always.</h3>
+          <h3 style={{fontSize: '30px'}}> Helping you stay on track, one day at a time.</h3>
           
         </div>
         <div className="tracker">

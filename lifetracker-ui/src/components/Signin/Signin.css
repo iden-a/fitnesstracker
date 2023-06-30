@@ -1,17 +1,29 @@
-.input-field {
+.input{
   display: flex;
-  font-size: 25px;
+  flex-direction: column;
+  width: 90%;
+  margin: 8px 0;
   justify-content: center;
+  padding: 10px;
+  border-radius: 10px;
+  border: solid 1px;
+  margin-left: 25px;
 }
 
 #login-btn {
-  /* width: 100%; */
+  width: 100px;
   padding: 10px;
-  background-color: #21c9f3;
+  background-color:  #6CB4EE;
   color: black;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
+  display: inline-block;
+  font-weight: 300;
+  width: 94%;
+  margin-left: 25px;
+  font-weight: bold;
+  font-size: 15px;
  
 }
 
@@ -21,5 +33,4 @@
   padding: 20px;
   background-color: #fff;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
