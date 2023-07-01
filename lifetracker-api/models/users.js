@@ -1,8 +1,8 @@
 "use strict"
 
-const db = require("../db")
+const db = require("../database")
 const bcrypt = require("bcrypt")
-// const { BadRequestError, UnauthorizedError } = require("../utils/errors")
+const { BadRequestError, UnauthorizedError } = require("../utils/errors")
 // const { validateFields } = require("../utils/validate")
 
 const { BCRYPT_WORK_FACTOR } = require("../config")
@@ -20,8 +20,8 @@ class User {
     return {
       id: user.id,
       username: user.username,
-      firstName: user.first_name,
-      lastName: user.last_name,
+      first_name: user.first_name,
+      last_name: user.last_name,
       email: user.email,
       created_at: user.created_at,
       updated_at: user.updated_at,
@@ -37,13 +37,7 @@ class User {
    **/
 
   static async authenticate(creds) {
-    const { email, username, firstname, lastname, password,  } = creds
-    const requiredCreds = ["email", "password"]
-    try {
-      validateFields({ required: requiredCreds, obj: creds, location: "user authentication" })
-    } catch (err) {
-      throw err
-    }
+    const { email, password } = creds
 
     const user = await User.fetchUserByEmail(email)
 
@@ -67,13 +61,13 @@ class User {
    **/
 
   static async register(creds) {
-    const { email, password, firstName, lastName, location, date } = creds
-    const requiredCreds = ["email", "password", "firstName", "lastName", "location", "date"]
-    try {
-      validateFields({ required: requiredCreds, obj: creds, location: "user registration" })
-    } catch (err) {
-      throw err
-    }
+    const { email, username, first_name, last_name, password} = creds
+    // const requiredCreds = ["email", "username", "first_name", "last_name","password"]
+    // try {
+    //   validateFields({ required: requiredCreds, obj: creds, location: "user registration" })
+    // } catch (err) {
+    //   throw err
+    // }
 
     const existingUserWithEmail = await User.fetchUserByEmail(email)
     if (existingUserWithEmail) {
@@ -83,24 +77,36 @@ class User {
     const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR)
     const normalizedEmail = email.toLowerCase()
 
+
+  // to make the dates for the created_at and updated_at fields.
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    const date = currentDate.getDate().toString().padStart(2, "0");
+    const hours = currentDate.getHours().toString().padStart(2, "0");
+    const minutes = currentDate.getMinutes().toString().padStart(2, "0");
+    const seconds = currentDate.getSeconds().toString().padStart(2, "0");
+    const datetime = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
+
+    const created_at = datetime
+    const updated_at = datetime
+
+
     const result = await db.query(
       `INSERT INTO users (
-          password,
-          first_name,
+          email, 
+          username, 
+          first_name, 
           last_name,
-          email,
-          location,
-          date
+          password,
+          created_at,
+          updated_at
         )
-        VALUES ($1, $2, $3, $4, $5, $6)
-        RETURNING id,
-                  email,            
-                  first_name , 
-                  last_name ,
-                  location,
-                  date
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        RETURNING first_name , 
+                  last_name 
                   `,
-      [hashedPassword, firstName, lastName, normalizedEmail, location, date]
+      [normalizedEmail, username, first_name, last_name, hashedPassword, created_at, updated_at]
     )
 
     const user = result.rows[0]
@@ -119,10 +125,9 @@ class User {
       `SELECT id,
               email, 
               password,
-              first_name AS "firstName",
-              last_name AS "lastName",
-              location,
-              date              
+              first_name ,
+              last_name 
+
            FROM users
            WHERE email = $1`,
       [email.toLowerCase()]

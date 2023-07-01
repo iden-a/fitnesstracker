@@ -8,7 +8,9 @@ export default function Navbar() {
     <>
       <nav className="navbar">
         <div>
+          <Link to="/">
           <img src={logo} alt="code path logo" id="logo" />
+          </Link>
           <ul
             style={{
               display: "flex",

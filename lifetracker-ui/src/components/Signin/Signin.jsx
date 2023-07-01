@@ -8,6 +8,21 @@ export default function Signin() {
     password: "",
   });
 
+  const [errors, setErrors] = useState({})
+
+  const handleOnInputChange = (event) => {
+    if (event.target.name === "email") { console.log("yes")
+      if (event.target.value.indexOf("@") === -1) {
+        console.log("no")
+        setErrors((e) => ({ ...e, email: "Please enter a valid email." }))
+      } else {
+        console.log('mee')
+        setErrors((e) => ({ ...e, email: null }))
+      }
+    }
+    setUserInfo((prevState) => ({ ...prevState, [event.target.name]: event.target.value }))
+  }
+
   return (
     <>
       <h2 style={{ textAlign: "center", fontSize: "40px" }}>Welcome</h2>
@@ -16,16 +31,12 @@ export default function Signin() {
           <label htmlFor="email"></label>
           <input className="input" style={{fontSize:"20px"}}
             value={userInfo.email}
-            onChange={(e) =>
-              setUserInfo((prevState) => ({
-                ...prevState,
-                email: e.target.value,
-              }))
-            }
+            onChange={handleOnInputChange}
             type="email"
             name="email"
             placeholder="Email"
           />
+            {errors.email && <span className="error">{errors.email}</span>}
         </div>
         <div className="input-field">
           <label htmlFor="password"></label>
