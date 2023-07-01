@@ -1,29 +1,39 @@
 import * as React from "react";
-import './App.css';
-import {useState} from "react";
-import { BrowserRouter,Routes, Route } from "react-router-dom";
+import "./App.css";
+import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
-import Home from "../Home/Home"
+import Home from "../Home/Home";
 import Signin from "../Signin/Signin";
 import Register from "../Register/Register";
 
-
 export default function App() {
-  const [appState, setAppState] = useState({})
+  const [appState, setAppState] = useState({
+    user: {},
+    isAuthenticated: false,
+    nutrition: {},
+    sleep: {},
+    exercise: {},
+  });
+
   return (
     <>
-    <div className="app">
-      <BrowserRouter>
-      <Navbar  />
-        <Routes>
-        <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/signin" element={<Signin />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+      <div className="app">
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/register"
+              element={<Register setAppState={setAppState} />}
+            />
+            <Route
+              path="/signin"
+              element={<Signin setAppState={setAppState} />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </>
-  )
+  );
 }
-
-
