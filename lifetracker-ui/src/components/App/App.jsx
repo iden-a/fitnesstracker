@@ -7,6 +7,9 @@ import Home from "../Home/Home";
 import Signin from "../Signin/Signin";
 import Register from "../Register/Register";
 import ActivityPage from "../ActivityPage/ActivityPage";
+import ExercisePage from "../ExercisePage/ExercisePage";
+import NutritionPage from "../NutritionPage/NutritionPage";
+import SleepPage from "../SleepPage/SleepPage";
 
 export default function App() {
   const [appState, setAppState] = useState({
@@ -25,12 +28,20 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route
-              path="/register"
-              element={<Register setAppState={setAppState} />}
-            />
-            <Route
-              path="/#activity"
+              path="/activity"
               element={<ActivityPage setAppState={setAppState} />}
+            />
+              <Route
+              path="/exercise"
+              element={<ExercisePage setAppState={setAppState} />}
+            />
+              <Route
+              path="/nutrition"
+              element={<NutritionPage setAppState={setAppState} />}
+            />
+              <Route
+              path="/sleep"
+              element={<SleepPage setAppState={setAppState} />}
             />
             <Route
               path="/register"

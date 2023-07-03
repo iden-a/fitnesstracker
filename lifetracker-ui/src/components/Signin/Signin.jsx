@@ -62,7 +62,7 @@ export default function Signin({ setAppState }) {
       }
     } catch (err) {
       console.log(err);
-      const message = err?.response?.data?.error?.message;
+      const message = "Incorrect password, try again."
       setErrors((e) => ({
         ...e,
         form: message ? String(message) : String(err),
@@ -70,7 +70,6 @@ export default function Signin({ setAppState }) {
     }
 
   };
-
   return (
     <>
       <h2 style={{ textAlign: "center", fontSize: "40px" }}>Welcome!</h2>
@@ -86,7 +85,7 @@ export default function Signin({ setAppState }) {
             name="email"
             placeholder="Email"
           />
-          {errors.email && <span className="error">{errors.email}</span>}
+          {errors.email && <span className="error" style={{paddingLeft:'20px', color:'red', fontWeight:'bold'}}>{errors.email}</span>}
         </div>
         <div className="input-field">
           <label htmlFor="password"></label>
@@ -104,6 +103,9 @@ export default function Signin({ setAppState }) {
             name="password"
             placeholder="Password"
           />
+          {errors.form && (
+            <span className="error" style={{paddingLeft:'20px', color:'red', fontWeight:'bold'}}>{errors.form}</span>
+          )}
         </div>
         <button id="login-btn" onClick={handleOnSubmit}>
           Login

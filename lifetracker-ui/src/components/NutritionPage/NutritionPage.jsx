@@ -1,8 +1,8 @@
 import * as React from "react";
-import "./ActivityPage.css";
+import "./NutritionPage.css";
 
 
-export default function ActivityPage(){
+export default function NutritionPage(){
 
     return(
         <h1 style={{paddingLeft:'180px', fontSize:'40px'}}>Log in to see to your data.</h1>

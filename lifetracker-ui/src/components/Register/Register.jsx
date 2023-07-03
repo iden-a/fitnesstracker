@@ -92,7 +92,7 @@ export default function Register({ setAppState }) {
       }
     } catch (err) {
       console.log(err);
-      const message = err?.response?.data?.error?.message;
+      const message = "Something went wrong with registration, try again dumbass!";
       setErrors((e) => ({
         ...e,
         form: message ? String(message) : String(err),
@@ -117,7 +117,7 @@ export default function Register({ setAppState }) {
             name="email"
             placeholder="Email"
           />
-          {errors.email && <span className="error" style={{}}>{errors.email}</span>}
+          {errors.email && <span className="error" style={{paddingLeft:'20px', color:'red', fontWeight:'bold'}}>{errors.email}</span>}
         </div>
 
         <div className="input-field">
@@ -186,7 +186,10 @@ export default function Register({ setAppState }) {
             placeholder="Confirm Password"
           />
           {errors.confirmPassword && (
-            <span className="error">{errors.confirmPassword}</span>
+            <span className="error" style={{paddingLeft:'20px', color:'red', fontWeight:'bold'}} >{errors.confirmPassword}</span>
+          )}
+          {errors.form && (
+            <span className="error" style={{paddingLeft:'20px',  marginTop:'20px', color:'red', fontWeight:'bold'}} >{errors.form}</span>
           )}
         </div>
 
