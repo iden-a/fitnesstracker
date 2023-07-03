@@ -66,7 +66,7 @@ export default function Register({ setAppState }) {
     }
 
     try {
-      const res = await axios.post("http://localhost:3001/auth/register", {
+      const res = await axios.post(`http://localhost:3001/auth/register`, {
         email: userInfo.email,
         username: userInfo.username,
         first_name: userInfo.first_name,
@@ -117,7 +117,7 @@ export default function Register({ setAppState }) {
             name="email"
             placeholder="Email"
           />
-          {errors.email && <span className="error">{errors.email}</span>}
+          {errors.email && <span className="error" style={{}}>{errors.email}</span>}
         </div>
 
         <div className="input-field">

@@ -16,11 +16,11 @@ export default function Navbar() {
               display: "flex",
             }}
           >
+          
             <li>
-              <a href="/">Home</a>
-            </li>
-            <li>
+              <Link to="/#activity">
               <a href="#activity">Activity</a>
+              </Link>
             </li>
             <li>
               <a href="#exercise">Exercise</a>

@@ -5,8 +5,8 @@ CREATE TABLE users (
   first_name    VARCHAR(255) NOT NULL,
   last_name     VARCHAR(255) NOT NULL,
   email         VARCHAR(255) NOT NULL UNIQUE CHECK (position('@' IN email) > 1),
-  created_at    TIMESTAMP NOT NULL DEFAULT NOW(),
-  updated_at    TIMESTAMP NOT NULL DEFAULT NOW()
+  created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -17,7 +17,7 @@ CREATE TABLE nutrition (
   calories          INTEGER NOT NULL,
   image_url         VARCHAR(255) NOT NULL UNIQUE CHECK (position('http://' IN image_url) > 0),
   user_id           INTEGER NOT NULL,
-  created_at        TIMESTAMP NOT NULL DEFAULT NOW(),
+  created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
 

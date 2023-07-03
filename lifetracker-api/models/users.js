@@ -79,17 +79,17 @@ class User {
 
 
   // to make the dates for the created_at and updated_at fields.
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-    const date = currentDate.getDate().toString().padStart(2, "0");
-    const hours = currentDate.getHours().toString().padStart(2, "0");
-    const minutes = currentDate.getMinutes().toString().padStart(2, "0");
-    const seconds = currentDate.getSeconds().toString().padStart(2, "0");
-    const datetime = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
+    // const currentDate = new Date();
+    // const year = currentDate.getFullYear();
+    // const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    // const date = currentDate.getDate().toString().padStart(2, "0");
+    // const hours = currentDate.getHours().toString().padStart(2, "0");
+    // const minutes = currentDate.getMinutes().toString().padStart(2, "0");
+    // const seconds = currentDate.getSeconds().toString().padStart(2, "0");
+    // const datetime = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
 
-    const created_at = datetime
-    const updated_at = datetime
+    // const created_at = datetime
+    // const updated_at = datetime
 
 
     const result = await db.query(
@@ -149,10 +149,9 @@ class User {
       `SELECT id,
               email,    
               password,
-              first_name AS "firstName",
-              last_name AS "lastName",
-              location,
-              date              
+              first_name,
+              last_name,
+                        
            FROM users
            WHERE id = $1`,
       [userId]

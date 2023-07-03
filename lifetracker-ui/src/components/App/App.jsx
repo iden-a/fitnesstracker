@@ -6,6 +6,7 @@ import Navbar from "../Navbar/Navbar";
 import Home from "../Home/Home";
 import Signin from "../Signin/Signin";
 import Register from "../Register/Register";
+import ActivityPage from "../ActivityPage/ActivityPage";
 
 export default function App() {
   const [appState, setAppState] = useState({
@@ -23,6 +24,14 @@ export default function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route
+              path="/register"
+              element={<Register setAppState={setAppState} />}
+            />
+            <Route
+              path="/#activity"
+              element={<ActivityPage setAppState={setAppState} />}
+            />
             <Route
               path="/register"
               element={<Register setAppState={setAppState} />}

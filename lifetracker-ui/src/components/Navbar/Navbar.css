@@ -9,7 +9,7 @@ nav ul {
 nav ul li {
   display: inline-block;
   margin: 10px;
-  margin-right: 100px;
+  margin-right: 140px;
 }
 
 a {
@@ -19,10 +19,12 @@ a {
 }
 
 #logo {
-  width: 150px;
+  width: 180px;
   height: 100px;
   margin-left: 170px;
 }
+
+
 
 #signin, #register{
 border-radius: 10px;
