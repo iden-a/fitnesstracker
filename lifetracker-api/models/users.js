@@ -90,6 +90,7 @@ class User {
 
     // const created_at = datetime
     // const updated_at = datetime
+   
 
 
     const result = await db.query(
@@ -101,15 +102,45 @@ class User {
           password
         )
         VALUES ($1, $2, $3, $4, $5)
-        RETURNING first_name , 
+        RETURNING 
+                    id,
+                    email,
+                  first_name , 
                   last_name 
                   `,
-      [normalizedEmail, username, first_name, last_name, hashedPassword]
+      [ normalizedEmail, username, first_name, last_name, hashedPassword]
     )
 
     const user = result.rows[0]
 
     return user
+  }
+
+  static async nutrition (creds) {
+    const { user_id, name, category, quantity, calories, image_url} = creds
+
+    const result = await db.query(
+      `INSERT INTO nutrition (
+          user_id,
+          name, 
+          category, 
+          quantity, 
+          calories,
+          image_url
+        )
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING name,
+                  category,
+                  quantity,
+                  calories,
+                  image_url 
+                  `,
+      [user_id,name, category, quantity, calories, image_url]
+    )
+
+    const nutrition = result.rows[0]
+
+    return nutrition
   }
 
   /**
@@ -159,6 +190,11 @@ class User {
 
     return user
   }
+
+
+
+
+
 }
 
 module.exports = User

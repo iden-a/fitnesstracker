@@ -15,6 +15,7 @@ CREATE TABLE nutrition (
   name              VARCHAR(255) NOT NULL,
   category          VARCHAR(255) NOT NULL,
   calories          INTEGER NOT NULL,
+  quantity          INTEGER NOT NULL,
   image_url         VARCHAR(255) CHECK (image_url IS NULL OR POSITION ('http://' IN image_url) > 0),
   created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   user_id           INTEGER NOT NULL,
