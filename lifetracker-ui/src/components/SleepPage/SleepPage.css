@@ -1,6 +1,37 @@
-.SleepPage .button {
-  display: flex;
+
+
+.banner {
+  background-color: white;
+  text-align: center;
+  width: 100%;
+  height: 150px;
+  font-size: 25px;
+  padding-top: 80px;
+  
 }
-.SleepPage .button button {
-  flex: 1;
+
+#sleep-btn{
+border-radius: 10px;
+width: 250px;
+height: 30px;
+background-color:  #0066b2;
+border: none;
+font-size: 15px;
+color: aliceblue;
+}
+
+.sleep-auth{
+  background-color: white;
+  text-align: center;
+}
+
+.sleep-auth img {
+  display: flex;
+  height: 320px;
+  width: 300px;
+  object-fit:cover;
+  border-radius: 40px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

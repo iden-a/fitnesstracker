@@ -98,15 +98,13 @@ class User {
           username, 
           first_name, 
           last_name,
-          password,
-          created_at,
-          updated_at
+          password
         )
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        VALUES ($1, $2, $3, $4, $5)
         RETURNING first_name , 
                   last_name 
                   `,
-      [normalizedEmail, username, first_name, last_name, hashedPassword, created_at, updated_at]
+      [normalizedEmail, username, first_name, last_name, hashedPassword]
     )
 
     const user = result.rows[0]

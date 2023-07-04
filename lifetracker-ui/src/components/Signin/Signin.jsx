@@ -49,7 +49,7 @@ export default function Signin({ setAppState }) {
         setAppState((...prevState) => ({
           ...prevState,
           user: res.data.user,
-          isAuthenticated: true,
+          isAuthenticated: true
         }));
         setIsLoading(false);
         navigate("/");

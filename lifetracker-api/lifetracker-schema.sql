@@ -15,12 +15,31 @@ CREATE TABLE nutrition (
   name              VARCHAR(255) NOT NULL,
   category          VARCHAR(255) NOT NULL,
   calories          INTEGER NOT NULL,
-  image_url         VARCHAR(255) NOT NULL UNIQUE CHECK (position('http://' IN image_url) > 0),
-  user_id           INTEGER NOT NULL,
+  image_url         VARCHAR(255) CHECK (image_url IS NULL OR POSITION ('http://' IN image_url) > 0),
   created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  user_id           INTEGER NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
+CREATE TABLE exercise (
+  id                SERIAL PRIMARY KEY,
+  name              VARCHAR(255) NOT NULL,
+  category          VARCHAR(255) NOT NULL,
+  duration          INTEGER NOT NULL,
+  intensity         INTEGER NOT NULL,
+  created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  user_id           INTEGER NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+
+CREATE TABLE sleep (
+  id                SERIAL PRIMARY KEY,
+  start_time        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  end_time          TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  user_id           INTEGER NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
 
 
 

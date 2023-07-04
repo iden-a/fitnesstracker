@@ -8,9 +8,13 @@
 .home {
  justify-content: space-around;
   display: flex;
-  
-  
 }
+
+.homeauth {
+  justify-content: space-around;
+   display: flex;
+ }
+
 .tiles{
   display: flex;
   justify-content: space-around;
@@ -36,3 +40,8 @@
   -webkit-box-shadow: 0 0 10px blue;
   box-shadow: 0 0 10px blue;}
      
+  .trackerauth img{
+    border-radius: 20px;
+    height: 400px;
+    width: 600px;
+  }

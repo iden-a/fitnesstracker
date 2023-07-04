@@ -1,0 +1,23 @@
+.activity-title {
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#act-btn{
+    border-radius: 10px;
+    width: 100;
+    height: 50px;
+    
+    background-color:  #0066b2;
+    border: none;
+    font-size: 15px;
+    color: aliceblue;
+    justify-content: center;
+    margin-left: 20px;
+
+
+
+}

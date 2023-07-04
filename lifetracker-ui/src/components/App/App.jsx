@@ -19,29 +19,29 @@ export default function App() {
     sleep: {},
     exercise: {},
   });
-
+console.log(appState)
   return (
     <>
       <div className="app">
         <BrowserRouter>
-          <Navbar />
+          <Navbar appState={appState} setAppState={setAppState}/>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home  appState={appState}/>} />
             <Route
               path="/activity"
-              element={<ActivityPage setAppState={setAppState} />}
+              element={<ActivityPage appState={appState} setAppState={setAppState} />}
             />
               <Route
               path="/exercise"
-              element={<ExercisePage setAppState={setAppState} />}
+              element={<ExercisePage appState={appState} setAppState={setAppState} />}
             />
               <Route
               path="/nutrition"
-              element={<NutritionPage setAppState={setAppState} />}
+              element={<NutritionPage appState={appState} setAppState={setAppState} />}
             />
               <Route
               path="/sleep"
-              element={<SleepPage setAppState={setAppState} />}
+              element={<SleepPage appState={appState} setAppState={setAppState} />}
             />
             <Route
               path="/register"

@@ -26,7 +26,7 @@ a {
 
 
 
-#signin, #register{
+#signin, #register, #signout{
 border-radius: 10px;
 width: 90px;
 height: 30px;
