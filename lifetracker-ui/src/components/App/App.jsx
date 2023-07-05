@@ -15,9 +15,9 @@ export default function App() {
   const [appState, setAppState] = useState({
     user: {},
     isAuthenticated: false,
-    nutrition: {},
-    sleep: {},
-    exercise: {},
+    nutrition: [],
+    sleep: [],
+    exercise: [],
   });
 console.log(appState)
   return (

@@ -1,12 +1,15 @@
 
 .banner {
-  background-color: white;
   text-align: center;
   width: 100%;
-  height: 150px;
+  height: 0px;
   font-size: 25px;
-  padding-top: 80px;
-  
+  padding-top: 30px;
+  background-color: white;
+}
+
+#banner-title{
+  margin-top: -20px;
 }
 
 #exercise-btn{
@@ -20,7 +23,7 @@ color: aliceblue;
 }
 
 .exercise-auth{
-  background-color: white;
+  /* background-color: white; */
   text-align: center;
 }
 
@@ -36,7 +39,6 @@ color: aliceblue;
 }
 
 .record-form{
-  
   width: 600px;
   margin: 0 auto;
   padding: 20px;
@@ -44,7 +46,6 @@ color: aliceblue;
   border-radius: 5px;
   border-color: red;
   border: solid 1px darkblue;
-  /* justify-content: center; */
 
 }
 

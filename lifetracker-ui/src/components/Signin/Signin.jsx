@@ -46,7 +46,7 @@ export default function Signin({ setAppState }) {
 
       console.log(res);
       if (res?.data?.user) {
-        setAppState((...prevState) => ({
+        setAppState((prevState) => ({
           ...prevState,
           user: res.data.user,
           isAuthenticated: true

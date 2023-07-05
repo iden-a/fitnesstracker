@@ -76,7 +76,7 @@ export default function Register({ setAppState }) {
 
       console.log(res);
       if (res?.data?.user) {
-        setAppState((...prevState) => ({
+        setAppState((prevState) => ({
           ...prevState,
           user: res.data.user,
           isAuthenticated: true,
@@ -93,7 +93,7 @@ export default function Register({ setAppState }) {
     } catch (err) {
       console.log(err);
       const message =
-        "Something went wrong with registration, try again dumbass!";
+        "Something went wrong with registration";
       setErrors((e) => ({
         ...e,
         form: message ? String(message) : String(err),
