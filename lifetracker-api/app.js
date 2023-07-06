@@ -3,6 +3,7 @@ const cors = require ('cors')
 const morgan = require ('morgan')
 const bcrypt = require ('bcrypt')
 const authRoutes = require("./routes/auth")
+const security = require("./middleware/security")
 
 
 const pool = require('./database')
@@ -13,6 +14,7 @@ const app = express ()
 app.use(cors())
 app.use(morgan('tiny'))
 app.use(express.json()) // req.body 
+app.use(security.extractUserFromJwt)
 
 app.use("/auth", authRoutes)
 

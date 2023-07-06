@@ -62,12 +62,6 @@ class User {
 
   static async register(creds) {
     const { email, username, first_name, last_name, password} = creds
-    // const requiredCreds = ["email", "username", "first_name", "last_name","password"]
-    // try {
-    //   validateFields({ required: requiredCreds, obj: creds, location: "user registration" })
-    // } catch (err) {
-    //   throw err
-    // }
 
     const existingUserWithEmail = await User.fetchUserByEmail(email)
     if (existingUserWithEmail) {
@@ -76,22 +70,6 @@ class User {
 
     const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR)
     const normalizedEmail = email.toLowerCase()
-
-
-  // to make the dates for the created_at and updated_at fields.
-    // const currentDate = new Date();
-    // const year = currentDate.getFullYear();
-    // const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
-    // const date = currentDate.getDate().toString().padStart(2, "0");
-    // const hours = currentDate.getHours().toString().padStart(2, "0");
-    // const minutes = currentDate.getMinutes().toString().padStart(2, "0");
-    // const seconds = currentDate.getSeconds().toString().padStart(2, "0");
-    // const datetime = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
-
-    // const created_at = datetime
-    // const updated_at = datetime
-   
-
 
     const result = await db.query(
       `INSERT INTO users (
@@ -102,11 +80,10 @@ class User {
           password
         )
         VALUES ($1, $2, $3, $4, $5)
-        RETURNING 
-                    id,
+        RETURNING   id,
                     email,
-                  first_name , 
-                  last_name 
+                    first_name , 
+                    last_name 
                   `,
       [ normalizedEmail, username, first_name, last_name, hashedPassword]
     )
@@ -143,6 +120,52 @@ class User {
     return nutrition
   }
 
+  static async exercise (creds) {
+    const { user_id, name, category, duration, intensity} = creds
+
+    const result = await db.query(
+      `INSERT INTO exercise (
+          user_id,
+          name, 
+          category, 
+          duration, 
+          intensity
+        )
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING name,
+                  category,
+                  duration,
+                  intensity
+                  `,
+      [user_id, name, category, duration, intensity]
+    )
+
+    const exercise = result.rows[0]
+
+    return exercise
+  }
+
+  static async sleep (creds) {
+    const { user_id, start_time, end_time } = creds
+
+    const result = await db.query(
+      `INSERT INTO sleep (
+          user_id,
+         start_time,
+         end_time
+        )
+        VALUES ($1, $2, $3 )
+        RETURNING start_time,
+                  end_time
+                  `,
+      [user_id, start_time, end_time]
+    )
+
+    const sleep = result.rows[0]
+
+    return sleep
+  }
+
   /**
    * Fetch a user in the database by email
    *
@@ -154,7 +177,7 @@ class User {
       `SELECT id,
               email, 
               password,
-              first_name ,
+              first_name,
               last_name 
 
            FROM users

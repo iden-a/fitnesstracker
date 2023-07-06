@@ -5,6 +5,7 @@
 const express = require("express")
 const User = require("../models/users")
 const router = express.Router()
+// const security = require("../middleware/security")
 
 router.post("/login", async function (req, res, next) {
   try {
@@ -36,7 +37,7 @@ router.post("/exercise", async function (req, res, next) {
 
 router.post("/nutrition", async function (req, res, next) {
   try {
-    console.log("iden")
+    // console.log("iden")
     const nutrition = await User.nutrition(req.body)
     return res.status(201).json({ nutrition })
   } catch (err) {
@@ -46,8 +47,8 @@ router.post("/nutrition", async function (req, res, next) {
 
 router.post("/sleep", async function (req, res, next) {
   try {
-    const user = await User.sleep(req.body)
-    return res.status(201).json({ user })
+    const sleep = await User.sleep(req.body)
+    return res.status(201).json({ sleep })
   } catch (err) {
     next(err)
   }

@@ -3,6 +3,7 @@ require("colors")
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3001
 // const IS_TESTING = process.env.NODE_ENV === "test"
+const SECRET_KEY = process.env.SECRET_KEY ||  "secret-dev"
 
 // Use dev database, testing database, or via env var, production database
 function getDatabaseUri() {
@@ -11,6 +12,7 @@ function getDatabaseUri() {
   const dbHost = process.env.PG_HOST || "local"
   const dbPort = process.env.PG_PORT || 5432
   const dbName = process.env.PG_DATABASE || "lifetracker"
+
 
   return process.env.DATABASE_URL || `postgresql://${dbUser}:${dbPass}@${dbHost}:${dbPort}/${dbName}`
 }
@@ -27,4 +29,5 @@ module.exports = {
   PORT,
   BCRYPT_WORK_FACTOR,
   getDatabaseUri,
+  SECRET_KEY
 }
