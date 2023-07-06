@@ -32,6 +32,7 @@ export default function ExercisePage({ appState, setAppState }) {
   const handleExercise = (event) => {
     event.preventDefault()
     setExerForm(true)
+    // setErrors((e) => ({ ...e, form: null }));
   }
 
 
@@ -79,7 +80,7 @@ export default function ExercisePage({ appState, setAppState }) {
       {appState.isAuthenticated ? (
         <>
           <div className="exercise-page">
-            <div className="banner">
+            <div className="exer-banner">
               <h1 id="banner-title"> Exercise </h1>
             </div>
             

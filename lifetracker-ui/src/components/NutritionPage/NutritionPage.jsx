@@ -75,8 +75,8 @@ export default function NutritionPage({ appState, setAppState }) {
       {appState.isAuthenticated ? (
         <>
           <div className="nutrition-page">
-            <div className="banner">
-              <h1> Nutrition </h1>
+            <div className="nut-banner">
+              <h1 id="banner-title"> Nutrition </h1>
             </div>
             {nutForm ? (
               <div className="record-form">

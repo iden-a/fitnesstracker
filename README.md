@@ -10,7 +10,7 @@ Everywhere around us is data waiting to be collected and utilized. In recent yea
 
 By the end of this project you will be able to...
 
-- [ ] Develop a full-fledged authentication system using PostgreSQL and `bcrypt`
+- [X] Develop a full-fledged authentication system using PostgreSQL and `bcrypt`
 - [ ] Provide users with an Express API they can interact with to store user-related activity
 - [ ] Construct multiple models that implement the core business logic associated with tracking users' lives
 - [ ] Write SQL queries that aggregate user statistics and provide summary overviews about their activity
@@ -23,19 +23,19 @@ By the end of this project you will be able to...
 
 ### Core Features
 
-- [ ] **The Landing Page:** Display a large hero image and a brief blurb on what this application is about. *Note:* This is the only page that unauthenticated users should be able to view.
-- [ ] **Registration Page:** A form that allows the user to sign up with their email, password, username, first name, and last name.
-- [ ] **Login Page:** A form that allows users to login with email and password.
-- [ ] When a user first authenticates, they should be redirected to an authenticated view (i.e., the detailed activity page). When they sign out, all frontend data should be reset.
-- [ ] **The Nav Bar:** Implement customized views for users who are logged in vs not logged in.
-  - [ ] If the user is logged in, it should display a **Sign Out** button.
-  - [ ] If no user is logged in, it should display **Login** and **Register** buttons.
-  - [ ] Display a logo on the far left side, and contain links to the individual detailed activity pages.
+- [X] **The Landing Page:** Display a large hero image and a brief blurb on what this application is about. *Note:* This is the only page that unauthenticated users should be able to view.
+- [X] **Registration Page:** A form that allows the user to sign up with their email, password, username, first name, and last name.
+- [X] **Login Page:** A form that allows users to login with email and password.
+- [X] When a user first authenticates, they should be redirected to an authenticated view (i.e., the detailed activity page). When they sign out, all frontend data should be reset.
+- [X] **The Nav Bar:** Implement customized views for users who are logged in vs not logged in.
+  - [X] If the user is logged in, it should display a **Sign Out** button.
+  - [X] If no user is logged in, it should display **Login** and **Register** buttons.
+  - [X] Display a logo on the far left side, and contain links to the individual detailed activity pages.
 - [ ] Users should have the ability to track at least **one** type of activity (i.e., nutrition, exercise, sleep, etc.). Each activity should be tracked on separate pages.
 - [ ] **Detailed Activity Page:** Display and enter activities.
   - [ ] Display a feed of all previously tracked activities.
-  - [ ] A form to enter relevant information (i.e., if tracking nutrition, the user can enter calories, timestamp, image, category, etc.).
-  - [ ] Each activity tracked is given a unique ID for easy lookup.
+  - [X] A form to enter relevant information (i.e., if tracking nutrition, the user can enter calories, timestamp, image, category, etc.).
+  - [X] Each activity tracked is given a unique ID for easy lookup.
 - [ ] Deploy your website with Render. Check out our [Render Deployment Guide](https://courses.codepath.org/snippets/site/render_deployment_guide) for detailed instructions.
 
 ### Stretch Features
@@ -43,7 +43,7 @@ By the end of this project you will be able to...
 Implement any of the following features to improve the application:
 
 - [ ] Users have access to an overview Activity page that shows one summary statistic about each of the three types of activity tracked (i.e., total number of minutes exercised, average calories consumed, max hours of sleep in one night, etc.). These summary statistics should be created using the `AVG`, `SUM`, `COUNT`, `MIN`, `MAX`, functions in SQL queries and served from a dedicated API endpoint. *Note: Summary statistics should not be calculated on the frontend.*
-- [ ] Each model (i.e `nutrition`, `exercise`, and `sleep`) should also implement a `fetchById` method that queries the database for a record by its id and only serves it to users who own that resource.
+- [X] Each model (i.e `nutrition`, `exercise`, and `sleep`) should also implement a `fetchById` method that queries the database for a record by its id and only serves it to users who own that resource.
   - You should also create a new dynamic route on the frontend that displays detail about a single record. For instance, `nutrition/detail/:id` should show a page with all the information about a single nutrition item.
 - [ ] Provide a dropdown that allows users to filter activity based on a certain attribute of any activity item. Example: filter exercise or nutrition by category, or filter sleep by the week/month it was recorded.
 - [ ] Calculate aggregate statistics based on time periods - such as daily, weekly, monthly aggregates.

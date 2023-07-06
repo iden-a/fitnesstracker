@@ -3,6 +3,7 @@ import "./Signin.css";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import apiClient from "../../services/apiClient";
 
 
 export default function Signin({ setAppState }) {
@@ -39,35 +40,75 @@ export default function Signin({ setAppState }) {
     setErrors((e) => ({ ...e, form: null }));
 
     try {
-      const res = await axios.post(`http://localhost:3001/auth/login`, {
+      const token = localStorage.getItem("lifeTrackerToken");
+      apiClient.setToken(token);
+      const { data, error, message } = await apiClient.login({
         email: userInfo.email,
         password: userInfo.password,
       });
-
-      console.log(res);
-      if (res?.data?.user) {
-        setAppState((prevState) => ({
-          ...prevState,
-          user: res.data.user,
-          isAuthenticated: true
-        }));
-        setIsLoading(false);
-        navigate("/");
-      } else {
+      console.log(data);
+      if (error) {
         setErrors((e) => ({
           ...e,
           form: "Something went wrong with logging in",
         }));
         setIsLoading(false);
+        return;
+      }
+      if (data) {
+        setErrors("");
+        setAppState((prevState) => ({
+          ...prevState,
+          user: {},
+          isAuthenticated: true,
+    
+        }));
+        localStorage.setItem("lifeTrackerToken", data.token)
+        apiClient.setToken(data.token)
+        navigate("/")
+      } else {
+        setErrors("Something went wrong with logging in.")
       }
     } catch (err) {
       console.log(err);
-      const message = "Incorrect password, try again."
+      const message = "Something went wrong with logging in.";
       setErrors((e) => ({
         ...e,
         form: message ? String(message) : String(err),
       }));
     }
+
+    // try {
+    //   const res = await axios.post(`http://localhost:3001/auth/login`, {
+    //     email: userInfo.email,
+    //     password: userInfo.password,
+    //   });
+
+    //   console.log(res);
+    //   if (res?.data?.user) {
+    //   localStorage.setItem('lifeTrackerToken', res.data.token)
+    //     setAppState((prevState) => ({
+    //       ...prevState,
+    //       user: res.data.user,
+    //       isAuthenticated: true
+    //     }));
+    //     setIsLoading(false);
+    //     navigate("/");
+    //   } else {
+    //     setErrors((e) => ({
+    //       ...e,
+    //       form: "Something went wrong with logging in",
+    //     }));
+    //     setIsLoading(false);
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    //   const message = "Incorrect password, try again."
+    //   setErrors((e) => ({
+    //     ...e,
+    //     form: message ? String(message) : String(err),
+    //   }));
+    // }
 
   };
   return (

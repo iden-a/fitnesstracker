@@ -28,12 +28,13 @@ a {
 
 #signin, #register, #signout{
 border-radius: 10px;
-width: 90px;
-height: 30px;
+width: 100px;
+height: 35px;
 background-color:  #0066b2;
 border: none;
-font-size: 15px;
+font-size: 17px;
 color: aliceblue;
+margin-bottom: 5px;
 
 }
 

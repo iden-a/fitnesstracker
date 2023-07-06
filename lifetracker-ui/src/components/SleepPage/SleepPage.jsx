@@ -65,8 +65,8 @@ export default function SleepPage({ appState, setAppState }) {
       {appState.isAuthenticated ? (
         <>
           <div className="sleep-page">
-            <div className="banner">
-              <h1 style={{ marginTop: "20px", marginBottom: "20px" }}>
+            <div className="sleep-banner">
+              <h1 id="banner-title">
                 {" "}
                 Sleep{" "}
               </h1>
@@ -83,7 +83,7 @@ export default function SleepPage({ appState, setAppState }) {
               <label htmlFor="end_time"> End Time * </label>
               <input type="datetime-local" name="end_time" value={sleepInfo.end_time} onChange={handleOnInputChange}/>
             </div>
-            <button onClick={handleOnSubmit}>Save</button>
+            <button onClick={handleOnSubmit} id="save-btn">Save</button>
           </div>
 
             ) : (

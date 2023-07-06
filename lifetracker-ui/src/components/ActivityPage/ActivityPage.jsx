@@ -9,7 +9,7 @@ export default function ActivityPage({appState}){
 (
     <>
     <div className="activity-title">
-    <h1 id="title"> Activity Feed </h1>
+    <h1 id="title" style={{fontSize:'40px'}}> Activity Feed </h1>
     <button id="act-btn"> Add Exercise </button>
     <button id="act-btn"> Log Sleep </button>
     <button id="act-btn"> Record Nutrition </button>
