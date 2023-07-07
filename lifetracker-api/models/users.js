@@ -40,12 +40,14 @@ class User {
     const { email, password } = creds
 
     const user = await User.fetchUserByEmail(email)
+    const exercise = await User.allExercise(user.id)
 
     if (user) {
       // compare hashed password to a new hash from password
       const isValid = await bcrypt.compare(password, user.password)
       if (isValid === true) {
-        return User._createPublicUser(user)
+        const userInfo =  User._createPublicUser(user)
+        return {exercise, userInfo}
       }
     }
 
@@ -135,7 +137,8 @@ class User {
         RETURNING name,
                   category,
                   duration,
-                  intensity
+                  intensity,
+                  created_at
                   `,
       [user_id, name, category, duration, intensity]
     )
@@ -223,11 +226,11 @@ class User {
         created_at
            FROM exercise
            WHERE user_id = $1
-           ORDER BY created_at DESC`
-           [id]``
+           ORDER BY created_at DESC`,
+           [id]
       );
 
-      const allExercise = result.rows
+      const allExercise = exercise.rows
 
       return allExercise 
 

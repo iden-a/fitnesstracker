@@ -67,13 +67,13 @@ class ApiClient {
     });
   }
 
-  async allExercise() {
-    return await this.request({
-      endpoint: `auth/exercise`,
-      method: `GET`
-      // data: creds,
-    });
-  }
+  // async allExercise() {
+  //   return await this.request({
+  //     endpoint: `auth/exercise`,
+  //     method: `GET`
+  //     // data: creds,
+  //   });
+  // }
 
   async nutrition(creds) {
     return await this.request({

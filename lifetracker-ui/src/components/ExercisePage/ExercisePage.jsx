@@ -27,13 +27,13 @@ export default function ExercisePage({ appState, setAppState }) {
     intensity: 0,
   });
 
-  useEffect(() => {
-    const allExercise = async () => {
-      const exerList = await apiClient.allExercise();
-      setExerList(exerList);
-    };
-    allExercise();
-  }, []);
+  // useEffect(() => {
+  //   const allExercise = async () => {
+  //     const exerList = await apiClient.allExercise();
+  //     setExerList(exerList);
+  //   };
+  //   allExercise();
+  // }, []);
 
   const handleOnInputChange = (e) => {
     setExerInfo({ ...exerInfo, [e.target.name]: e.target.value });
@@ -76,12 +76,14 @@ export default function ExercisePage({ appState, setAppState }) {
           setIsLoading(false);
           return;
         }
+        console.log("meeeeeee", data);
         if (data) {
           setErrors("");
           setAppState((prevState) => ({
             ...prevState,
-            user: data.user,
-            isAuthenticated: true,
+            // user: data.user,
+            // isAuthenticated: true,
+            exercise: [data.exercise, ...prevState.exercise],
           }));
           localStorage.setItem("lifeTrackerToken", data.token);
           apiClient.setToken(data.token);
@@ -91,7 +93,7 @@ export default function ExercisePage({ appState, setAppState }) {
         }
       } catch (err) {
         console.log(err);
-        const message = "Something went wrong with logging in.";
+        const message = "Something went wrong.";
         setErrors((e) => ({
           ...e,
           form: message ? String(message) : String(err),
@@ -180,18 +182,28 @@ export default function ExercisePage({ appState, setAppState }) {
                 )}
               </div>
             ) : (
-              <div className="exercise-auth">
-                <h1>Nothing here yet.</h1>
-                <button id="exercise-btn" onClick={handleExercise}>
-                  Add Exercise
-                </button>
-                <img src={Bike} alt="bike path for exercise" />
-              </div>
+              <>
+                {appState.exercise.length === 0 ? (
+                  <div className="exercise-auth">
+                    <h1>Nothing here yet.</h1>
+                    <button id="exercise-btn" onClick={handleExercise}>
+                      Add Exercise
+                    </button>
+                    <img src={Bike} alt="bike path for exercise" />
+                  </div>
+                ) : (
+                  <>
+                  <button id="exercise-entry-btn" onClick={handleExercise}>
+                      Add Exercise
+                    </button>
+                    {appState.exercise?.map((exercise) => (
+                      <ExerciseCard exercise={exercise} />
+                    ))}{" "}
+                  </>
+                )}
+              </>
             )}
           </div>
-          {/* {exerList?.map(exerEntry => (
-        <ExerciseCard exerEntry={exerEntry} key={exerEntry.id} />
-      ))}  */}
         </>
       ) : (
         <h1 style={{ paddingLeft: "180px", fontSize: "40px" }}>

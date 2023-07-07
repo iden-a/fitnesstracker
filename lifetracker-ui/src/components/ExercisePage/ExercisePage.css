@@ -58,3 +58,29 @@ color: aliceblue;
 
 #form-btn{
 margin: 0 auto;}
+
+
+.exercise-results{
+  background-color:white;
+  /* justify-content: center; */
+  border: solid 3 px black;
+  border-radius: 10px;
+  text-align: center;
+  padding-top: 20px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+#exercise-entry-btn{
+  border-radius: 10px;
+width: 310px;
+height: 40px;
+background-color:  #0066b2;
+border: none;
+font-size: 20px;
+color: aliceblue;
+margin-top: 80px;
+text-align: center;
+margin-left: 740px;
+margin-bottom: 50px;
+}

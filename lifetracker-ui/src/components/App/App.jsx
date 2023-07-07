@@ -46,7 +46,7 @@ export default function App() {
           isAuthenticated: true,
           // nutrition: [],
           // sleep: [],
-          // exercise: [],
+          exercise: [],
         }));
       } else {
         setAppState({
@@ -60,7 +60,6 @@ export default function App() {
 
       console.log(appState);
     };
-    
     fetchUser();
   }, [appState.isAuthenticated]);
 

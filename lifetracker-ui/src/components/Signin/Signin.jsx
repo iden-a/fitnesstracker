@@ -59,7 +59,8 @@ export default function Signin({ setAppState, setIsLoggedIn }) {
         setErrors("");
         setAppState((prevState) => ({
           ...prevState,
-          user: data.user,
+          user: data.userInfo,
+          exercise: data.exercise,
           isAuthenticated: true,
         }));
         setIsLoggedIn(true)

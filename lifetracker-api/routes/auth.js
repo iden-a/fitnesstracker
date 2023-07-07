@@ -20,9 +20,9 @@ router.post("/me", async function (req, res, next) {
 
 router.post("/login", async function (req, res, next) {
   try {
-    const user = await User.authenticate(req.body)
-    const token = generateToken(user)
-    return res.status(200).json({ user, token })
+    const {userInfo, exercise} = await User.authenticate(req.body)
+    const token = generateToken(userInfo)
+    return res.status(200).json({ userInfo, exercise, token })
   } catch (err) {
     next(err)
   }
@@ -47,14 +47,15 @@ router.post("/exercise", async function (req, res, next) {
   }
 })
 
-router.get("/exercise", async function (req, res, next) {
-  try {
-    const exercise = await User.allExercise(res.locals.user.id)
-    return res.status(200).json({ exercise })
-  } catch (err) {
-    next(err)
-  }
-})
+// router.get("/exercise", async function (req, res, next) {
+//   try {
+//     console.log(res)
+//     const exercise = await User.allExercise(res.locals.user.id)
+//     return res.status(200).json({ exercise })
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
 router.post("/nutrition", async function (req, res, next) {
   try {
