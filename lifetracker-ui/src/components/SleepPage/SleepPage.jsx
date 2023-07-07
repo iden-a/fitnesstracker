@@ -26,38 +26,80 @@ export default function SleepPage({ appState, setAppState }) {
     e.preventDefault();
     setIsLoading(true);
     setErrors((e) => ({ ...e, form: null }));
-  
+    if (sleepInfo.name && sleepInfo.category && sleepInfo.duration && sleepInfo.intensity) {
 
-  try {
-      const res = await axios.post(`http://localhost:3001/auth/sleep`, {
-        user_id: appState.user.id, 
-      start_time: sleepInfo.start_time, 
-        end_time: sleepInfo.end_time
-    });
+      try {
+        const token = localStorage.getItem("lifeTrackerToken");
+        apiClient.setToken(token);
+        const { data, error, message } = await apiClient.sleep({
+          start_time: sleepInfo.start_time,
+          end_time: sleepInfo.end_time,
+        });
+    
+        console.log(data);
+        if (error) {
+          setErrors((e) => ({
+            ...e,
+            form: "Something went wrong, invalid input",
+          }));
+          setIsLoading(false);
+          return;
+        }
+        if (data) {
+          setErrors("");
+          setAppState((prevState) => ({
+            ...prevState,
+            user: data.user,
+            isAuthenticated: true,
+      
+          }));
+          localStorage.setItem("lifeTrackerToken", data.token)
+          apiClient.setToken(data.token)
+          navigate("/")
+        } else {
+          setErrors("Something went wrong, invalid input!")
+        }
+      } catch (err) {
+        console.log(err);
+        const message = "Something went wrong, invalid input.";
+        setErrors((e) => ({
+          ...e,
+          form: message ? String(message) : String(err),
+        }));
+      }
 
-    console.log(res);
-    if(res?.data?.sleep) {
-      setAppState((prevState) => ({
-        ...prevState,
-        sleep:[res.data.sleep, ...prevState.sleep]
-      }));
-      console.log(res.data.sleep)
-    } else {
-      setErrors((e) => ({
-        ...e,
-        form: "Invalid input."
-      }))
-    } 
-  } catch (err) {
-    console.log(err);
-    const message =
-      "Something went wrong with registration.";
-    setErrors((e) => ({
-      ...e,
-      form: message ? String(message) : String(err),
-    }));
-  }
-  setSleepForm(false)
+  // try {
+  //     const res = await axios.post(`http://localhost:3001/auth/sleep`, {
+  //       user_id: appState.user.id, 
+  //     start_time: sleepInfo.start_time, 
+  //       end_time: sleepInfo.end_time
+  //   });
+
+  //   console.log(res);
+  //   if(res?.data?.sleep) {
+  //     setAppState((prevState) => ({
+  //       ...prevState,
+  //       sleep:[res.data.sleep, ...prevState.sleep]
+  //     }));
+  //     console.log(res.data.sleep)
+  //   } else {
+  //     setErrors((e) => ({
+  //       ...e,
+  //       form: "Invalid input."
+  //     }))
+  //   } 
+  // } catch (err) {
+  //   console.log(err);
+  //   const message =
+  //     "Something went wrong with registration.";
+  //   setErrors((e) => ({
+  //     ...e,
+  //     form: message ? String(message) : String(err),
+  //   }));
+  // }
+  // setSleepForm(false)
+  // 
+}
   }
 
   return (

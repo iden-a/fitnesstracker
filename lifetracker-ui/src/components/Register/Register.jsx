@@ -56,6 +56,9 @@ export default function Register({ setAppState }) {
   const handleOnSubmit = async () => {
     setIsLoading(true);
     setErrors((e) => ({ ...e, form: null }));
+    if (userInfo.email && userInfo.username && userInfo.first_name && userInfo.last_name, userInfo.passwordConfirm, userInfo.confirmpassword) {
+
+
     console.log("anything");
 
     if (userInfo.confirmpassword !== userInfo.password) {
@@ -67,7 +70,7 @@ export default function Register({ setAppState }) {
     }
 
     try {
-      const token = localStorage.getItem("lifeTrackerToken");
+      const token = apiClient.fetchUserByToken;
       apiClient.setToken(token);
       const { data, error, message } = await apiClient.register({
         email: userInfo.email,
@@ -89,7 +92,7 @@ export default function Register({ setAppState }) {
         setErrors("");
         setAppState((prevState) => ({
           ...prevState,
-          user: {},
+          user: data.user,
           isAuthenticated: true,
          
         }));
@@ -107,6 +110,7 @@ export default function Register({ setAppState }) {
         form: message ? String(message) : String(err),
       }));
     }
+  }
     // try {
     //   const res = await axios.post(`http://localhost:3001//auth/register`, {
     //     email: userInfo.email,
@@ -223,6 +227,14 @@ export default function Register({ setAppState }) {
               name="password"
               placeholder="Password"
             />
+            {errors.confirmPassword && (
+            <span
+              className="error"
+              style={{ paddingLeft: "20px", color: "red", fontWeight: "bold" }}
+            >
+              {errors.confirmPassword}
+            </span>
+          )}
           </span>
         </div>
 
@@ -243,19 +255,6 @@ export default function Register({ setAppState }) {
               style={{ paddingLeft: "20px", color: "red", fontWeight: "bold" }}
             >
               {errors.confirmPassword}
-            </span>
-          )}
-          {errors.form && (
-            <span
-              className="error"
-              style={{
-                paddingLeft: "20px",
-                marginTop: "20px",
-                color: "red",
-                fontWeight: "bold",
-              }}
-            >
-              {errors.form}
             </span>
           )}
         </div>

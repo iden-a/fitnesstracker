@@ -10,8 +10,15 @@ export default function Navbar({ appState, setAppState }) {
 
   const handleOnSubmit =  (e) => {
     e.preventDefault();
-    setAppState((appState) => ({ ...appState, isAuthenticated: false }))
+    setAppState({
+      user: {},
+      isAuthenticated: false,
+      nutrition: [],
+      sleep: [],
+      exercise: [],
+    });
     navigate("/");
+    // setIsLoading((isLoading) => ({isLoading, isAuthenticated: false}))
    
     console.log("anything")}
 

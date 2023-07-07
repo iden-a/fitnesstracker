@@ -24,6 +24,9 @@ export default function ExercisePage({ appState, setAppState }) {
     intensity: 0,
   });
 
+
+
+
   const handleOnInputChange = (e) => {
     setExerInfo({ ...exerInfo, [e.target.name]: e.target.value });
   };
@@ -32,7 +35,8 @@ export default function ExercisePage({ appState, setAppState }) {
   const handleExercise = (event) => {
     event.preventDefault()
     setExerForm(true)
-    // setErrors((e) => ({ ...e, form: null }));
+    setErrors((e) => ({ ...e, form: null }));
+
   }
 
 
@@ -40,40 +44,53 @@ export default function ExercisePage({ appState, setAppState }) {
     e.preventDefault();
     setIsLoading(true);
     setErrors((e) => ({ ...e, form: null }));
-    // console.log(handleOnSubmit)
+    if (exerInfo.name && exerInfo.category && exerInfo.duration && exerInfo.intensity) {
 
-
-    try {
-      const res = await axios.post(`http://localhost:3001/auth/exercise`, {
-        user_id: appState.user.id,
-        name: exerInfo.name,
-        category: exerInfo.category,
-        duration: exerInfo.duration,
-        intensity: exerInfo.intensity,
-      });
-
-      console.log(res);
-      if (res?.data?.exercise) {
-        setAppState((prevState) => ({
-          ...prevState,
-          exercise: res.data.exercise,
-        }));
-      } else {
+      try {
+        const token = localStorage.getItem("lifeTrackerToken");
+        apiClient.setToken(token);
+        const { data, error, message } = await apiClient.sleep({
+          name: exerInfo.name,
+          category: exerInfo.category,
+          duration: exerInfo.duration,
+          intensity: exerInfo.intensity,
+        });
+    
+        console.log(data);
+        if (error) {
+          setErrors((e) => ({
+            ...e,
+            form: "Something went wrong with logging in",
+          }));
+          setIsLoading(false);
+          return;
+        }
+        if (data) {
+          setErrors("");
+          setAppState((prevState) => ({
+            ...prevState,
+            user: data.user,
+            isAuthenticated: true,
+      
+          }));
+          localStorage.setItem("lifeTrackerToken", data.token)
+          apiClient.setToken(data.token)
+          navigate("/")
+        } else {
+          setErrors("Something went wrong with logging in.")
+        }
+      } catch (err) {
+        console.log(err);
+        const message = "Something went wrong with logging in.";
         setErrors((e) => ({
           ...e,
-          form: "Invalid input.",
+          form: message ? String(message) : String(err),
         }));
       }
-    } catch (err) {
-      console.log(err);
-      const message = "Something went wrong with registration.";
-      setErrors((e) => ({
-        ...e,
-        form: message ? String(message) : String(err),
-      }));
-    }
+
     setExerForm(false)
   };
+}
 
   return (
     <>
@@ -96,6 +113,7 @@ export default function ExercisePage({ appState, setAppState }) {
                     placeholder="Name"
                     required
                   />
+                  
                 </div>
 
                 <div className="input-form">
@@ -139,6 +157,9 @@ export default function ExercisePage({ appState, setAppState }) {
                 <button id="form-btn" onClick={handleOnSubmit}>
                   Save
                 </button>
+                {errors.form && (
+            <span className="error" style={{paddingLeft:'20px', color:'red', fontWeight:'bold'}}>{errors.form}</span>
+          )}
               </div>
             ) : (
               <div className="exercise-auth">

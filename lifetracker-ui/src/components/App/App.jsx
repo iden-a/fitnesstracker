@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Home from "../Home/Home";
@@ -10,8 +10,14 @@ import ActivityPage from "../ActivityPage/ActivityPage";
 import ExercisePage from "../ExercisePage/ExercisePage";
 import NutritionPage from "../NutritionPage/NutritionPage";
 import SleepPage from "../SleepPage/SleepPage";
+import apiClient from "../../services/apiClient";
+import jwtDecode from "jwt-decode"
+
 
 export default function App() {
+
+  // const [isLoggedIn, setIsLoggedIn] = useState(true)
+
   const [appState, setAppState] = useState({
     user: {},
     isAuthenticated: false,
@@ -19,6 +25,50 @@ export default function App() {
     sleep: [],
     exercise: [],
   });
+
+
+    const token = localStorage.getItem("lifeTrackerToken")
+    console.log(token)
+
+useEffect (() => {
+  const fetchUser = async () => {
+    const token = localStorage.getItem("lifeTrackerToken")
+    let decodedToken = jwtDecode(token)
+    const { email } = decodedToken
+    let user = await apiClient.fetchUserByEmail({'email': email})
+    console.log("USER: ");
+    console.log(user);
+
+    if (appState.isAuthenticated) {
+      user = user.data.user
+      // repopulate state
+      setAppState((prevState) => ({
+        ...prevState,
+        user: user,
+        isAuthenticated: true,
+        // nutrition: [],
+        // sleep: [], 
+        // exercise: [],
+      }));
+    } else {
+      setAppState({
+        user: {},
+        isAuthenticated: false,
+        nutrition: [],
+        sleep: [],
+        exercise: []
+      })
+    }
+
+    console.log(appState)
+
+  }
+  fetchUser()
+  
+},
+[appState.isAuthenticated])
+
+
 console.log(appState)
   return (
     <>

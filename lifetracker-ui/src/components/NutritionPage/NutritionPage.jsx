@@ -12,10 +12,10 @@ const categoryOptions = [
 ];
 
 export default function NutritionPage({ appState, setAppState }) {
-  const [nutForm, setNutForm] = useState(false);
+  const [nutriForm, setNutriForm] = useState(false);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState({});
-  const [nutInfo, setNutInfo] = useState({
+  const [nutriInfo, setNutriInfo] = useState({
     name: "",
     category: "Select a category",
     quantity: 1,
@@ -24,51 +24,66 @@ export default function NutritionPage({ appState, setAppState }) {
   });
 
   const handleOnInputChange = (event) => {
-    setNutInfo({ ...nutInfo, [event.target.name]: event.target.value });
+    setNutriInfo({ ...nutriInfo, [event.target.name]: event.target.value });
   };
 
   const handleNutrition = (event) => {
-    event.preventDefault(setNutForm(true));
+    event.preventDefault(setNutriForm(true));
   };
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
     setErrors((e) => ({ ...e, form: null }));
+    if (nutriInfo.name && nutriInfo.category && nutriInfo.quantity && nutriInfo.calories) {
 
-    try {
-      const res = await axios.post(`http://localhost:3001/auth/nutrition`, {
-        user_id: appState.user.id,
-        name: nutInfo.name,
-        category: nutInfo.category,
-        quantity: nutInfo.quantity,
-        calories: nutInfo.calories,
-        image_url: nutInfo.image_url,
-      });
 
-      console.log(res);
-      if (res?.data?.nutrition) {
-        setAppState((prevState) => ({
-          ...prevState,
-          nutrition: res.data.nutrition,
-        }));
-        console.log(res.data.nutrition);
-      } else {
+      try {
+        const token = localStorage.getItem("lifeTrackerToken");
+        apiClient.setToken(token);
+        const { data, error, message } = await apiClient.sleep({
+          name: nutriInfo.name,
+          category: nutriInfo.category,
+          quantity: nutriInfo.quantity,
+          calories: nutriInfo.calories,
+          image_url: nutriInfo.image_url,
+        });
+    
+        console.log(data);
+        if (error) {
+          setErrors((e) => ({
+            ...e,
+            form: "Something went wrong with logging in",
+          }));
+          setIsLoading(false);
+          return;
+        }
+        if (data) {
+          setErrors("");
+          setAppState((prevState) => ({
+            ...prevState,
+            user: data.user,
+            isAuthenticated: true,
+      
+          }));
+          localStorage.setItem("lifeTrackerToken", data.token)
+          apiClient.setToken(data.token)
+          navigate("/")
+        } else {
+          setErrors("Something went wrong with logging in.")
+        }
+      } catch (err) {
+        console.log(err);
+        const message = "Something went wrong with logging in.";
         setErrors((e) => ({
           ...e,
-          form: "Invalid input.",
+          form: message ? String(message) : String(err),
         }));
       }
-    } catch (err) {
-      console.log(err);
-      const message = "Something went wrong with registration.";
-      setErrors((e) => ({
-        ...e,
-        form: message ? String(message) : String(err),
-      }));
-    }
-    setNutForm(false);
+
+    setNutriForm(false);
   };
+}
 
   return (
     <>
@@ -78,18 +93,18 @@ export default function NutritionPage({ appState, setAppState }) {
             <div className="nut-banner">
               <h1 id="banner-title"> Nutrition </h1>
             </div>
-            {nutForm ? (
+            {nutriForm ? (
               <div className="record-form">
                 <div className="input-form">
                   <label htmlFor="name"></label>
                   <input
                     type="text"
                     name="name"
-                    value={nutInfo.name}
+                    value={nutriInfo.name}
                     onChange={handleOnInputChange}
                     placeholder="Name"
                   />
-                  {errors.name && <span className="error">{errors.name}</span>}
+                  {/* {errors.name && <span className="error">{errors.name}</span>} */}
                 </div>
 
                 <div className="input-form">
@@ -97,7 +112,7 @@ export default function NutritionPage({ appState, setAppState }) {
                   <select
                     name="category"
                     onChange={(event) =>
-                      setNutInfo((f) => ({
+                      setNutriInfo((f) => ({
                         ...f,
                         category: event.target.value,
                       }))
@@ -109,7 +124,7 @@ export default function NutritionPage({ appState, setAppState }) {
                       </option>
                     ))}
                   </select>
-                  {errors.category && <span className="error">{errors.category}</span>}
+                  {/* {errors.category && <span className="error">{errors.category}</span>} */}
                 </div>
 
                 <div className="input-form">
@@ -117,11 +132,11 @@ export default function NutritionPage({ appState, setAppState }) {
                   <input
                     type="number"
                     name="quantity"
-                    value={nutInfo.quantity}
+                    value={nutriInfo.quantity}
                     onChange={handleOnInputChange}
-                    required
+                    // required
                   />
-              {errors.quantity && <span className="error">{errors.quantity}</span>}
+              {/* {errors.quantity && <span className="error">{errors.quantity}</span>} */}
 
                 </div>
 
@@ -130,11 +145,11 @@ export default function NutritionPage({ appState, setAppState }) {
                   <input
                     type="number"
                     name="calories"
-                    value={nutInfo.calories}
+                    value={nutriInfo.calories}
                     onChange={handleOnInputChange}
-                    required
+                    // required
                   />
-                {errors.calories && <span className="error">{errors.calories}</span>}
+                {/* {errors.calories && <span className="error">{errors.calories}</span>} */}
 
                 </div>
                 <div className="input-form">
@@ -142,12 +157,12 @@ export default function NutritionPage({ appState, setAppState }) {
                   <input
                     type="text"
                     name="image_url"
-                    value={nutInfo.image_url}
+                    value={nutriInfo.image_url}
                     onChange={handleOnInputChange}
                     placeholder="url for image"
-                    required
+                    // required
                   />
-            {errors.image_url && <span className="error">{errors.image_url}</span>}
+            {/* {errors.image_url && <span className="error">{errors.image_url}</span>} */}
 
                 </div>
                 <button onClick={handleOnSubmit}>Save</button>

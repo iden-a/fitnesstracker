@@ -1,17 +1,16 @@
-"use strict"
-
 /** Routes for authentication. */
 
 const express = require("express")
 const User = require("../models/users")
-const router = express.Router()
 const {generateToken} = require("../utils/tokens")
 
 const security = require("../middleware/security")
+const router = express.Router()
 
-router.get("/me", security.requireAuthenticatedUser, async function (req, res, next) {
+router.post("/me", async function (req, res, next) {
+  console.log('in /me ')
   try {
-    const { email } = res.locals.user
+    const { email } = req.body;
     const user = await User.fetchUserByEmail(email)
     return res.status(200).json({ user })
   } catch (err) {

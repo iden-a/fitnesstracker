@@ -59,7 +59,7 @@ export default function Signin({ setAppState }) {
         setErrors("");
         setAppState((prevState) => ({
           ...prevState,
-          user: {},
+          user: data.user,
           isAuthenticated: true,
     
         }));
