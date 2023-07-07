@@ -35,18 +35,17 @@ export default function App() {
       const { email } = decodedToken;
       let user = await apiClient.fetchUserByEmail({ email: email });
       console.log("USER: ");
-      console.log(user);
+      console.log( "look for me here", user);
+      console.log("now this!!!", user.data.exercise )
 
       if (isLoggedIn) {
-        user = user.data.user;
+        const userInfo = user.data.user;
         // repopulate state
         setAppState((prevState) => ({
           ...prevState,
-          user: user,
+          user: userInfo,
           isAuthenticated: true,
-          // nutrition: [],
-          // sleep: [],
-          exercise: [],
+          exercise: user.data.exercise,
         }));
       } else {
         setAppState({

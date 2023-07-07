@@ -10,7 +10,7 @@ Everywhere around us is data waiting to be collected and utilized. In recent yea
 
 By the end of this project you will be able to...
 
-- [X] Develop a full-fledged authentication system using PostgreSQL and `bcrypt`
+- [ ] Develop a full-fledged authentication system using PostgreSQL and `bcrypt`
 - [ ] Provide users with an Express API they can interact with to store user-related activity
 - [ ] Construct multiple models that implement the core business logic associated with tracking users' lives
 - [ ] Write SQL queries that aggregate user statistics and provide summary overviews about their activity
@@ -32,23 +32,23 @@ By the end of this project you will be able to...
   - [X] If no user is logged in, it should display **Login** and **Register** buttons.
   - [X] Display a logo on the far left side, and contain links to the individual detailed activity pages.
 - [ ] Users should have the ability to track at least **one** type of activity (i.e., nutrition, exercise, sleep, etc.). Each activity should be tracked on separate pages.
-- [ ] **Detailed Activity Page:** Display and enter activities.
+- [X] **Detailed Activity Page:** Display and enter activities.
   - [ ] Display a feed of all previously tracked activities.
   - [X] A form to enter relevant information (i.e., if tracking nutrition, the user can enter calories, timestamp, image, category, etc.).
-  - [ ] Each activity tracked is given a unique ID for easy lookup.
+  - [X] Each activity tracked is given a unique ID for easy lookup.
 - [ ] Deploy your website with Render. Check out our [Render Deployment Guide](https://courses.codepath.org/snippets/site/render_deployment_guide) for detailed instructions.
 
 ### Stretch Features
 
 Implement any of the following features to improve the application:
 
-- [ ] Users have access to an overview Activity page that shows one summary statistic about each of the three types of activity tracked (i.e., total number of minutes exercised, average calories consumed, max hours of sleep in one night, etc.). These summary statistics should be created using the `AVG`, `SUM`, `COUNT`, `MIN`, `MAX`, functions in SQL queries and served from a dedicated API endpoint. *Note: Summary statistics should not be calculated on the frontend.*
-- [X] Each model (i.e `nutrition`, `exercise`, and `sleep`) should also implement a `fetchById` method that queries the database for a record by its id and only serves it to users who own that resource.
+- [X] Users have access to an overview Activity page that shows one summary statistic about each of the three types of activity tracked (i.e., total number of minutes exercised, average calories consumed, max hours of sleep in one night, etc.). These summary statistics should be created using the `AVG`, `SUM`, `COUNT`, `MIN`, `MAX`, functions in SQL queries and served from a dedicated API endpoint. *Note: Summary statistics should not be calculated on the frontend.*
+- [] Each model (i.e `nutrition`, `exercise`, and `sleep`) should also implement a `fetchById` method that queries the database for a record by its id and only serves it to users who own that resource.
   - You should also create a new dynamic route on the frontend that displays detail about a single record. For instance, `nutrition/detail/:id` should show a page with all the information about a single nutrition item.
 - [ ] Provide a dropdown that allows users to filter activity based on a certain attribute of any activity item. Example: filter exercise or nutrition by category, or filter sleep by the week/month it was recorded.
 - [ ] Calculate aggregate statistics based on time periods - such as daily, weekly, monthly aggregates.
 - [ ] Create a page that shows all other users that use the LifeTracker application and allow users to follow each other. You'll want to create a new table to store this data.
-- [ ] Implement `security` middleware on the API that allows only authenticated users to access resources and allows users to only access resources about themselves.
+- [X] Implement `security` middleware on the API that allows only authenticated users to access resources and allows users to only access resources about themselves.
 
 ### Building the app
 

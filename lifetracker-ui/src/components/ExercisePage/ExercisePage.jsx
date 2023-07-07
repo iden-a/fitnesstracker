@@ -2,7 +2,6 @@ import * as React from "react";
 import "./ExercisePage.css";
 import Bike from "../../assets/bikepath.jpg";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import apiClient from "../../services/apiClient";
 import ExerciseCard from "./ExerciseCard";
 
@@ -26,14 +25,6 @@ export default function ExercisePage({ appState, setAppState }) {
     duration: 0,
     intensity: 0,
   });
-
-  // useEffect(() => {
-  //   const allExercise = async () => {
-  //     const exerList = await apiClient.allExercise();
-  //     setExerList(exerList);
-  //   };
-  //   allExercise();
-  // }, []);
 
   const handleOnInputChange = (e) => {
     setExerInfo({ ...exerInfo, [e.target.name]: e.target.value });
@@ -81,8 +72,6 @@ export default function ExercisePage({ appState, setAppState }) {
           setErrors("");
           setAppState((prevState) => ({
             ...prevState,
-            // user: data.user,
-            // isAuthenticated: true,
             exercise: [data.exercise, ...prevState.exercise],
           }));
           localStorage.setItem("lifeTrackerToken", data.token);

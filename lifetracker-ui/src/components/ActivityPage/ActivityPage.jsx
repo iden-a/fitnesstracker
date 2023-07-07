@@ -1,7 +1,11 @@
 import * as React from "react";
 import "./ActivityPage.css";
 
-export default function ActivityPage({appState}){
+export default function ActivityPage({appState, setAppState}){
+const [stats, setStats] = useState({
+    avgExercise: 0,
+    totalExercise: 0
+})
 
     return(
 <>

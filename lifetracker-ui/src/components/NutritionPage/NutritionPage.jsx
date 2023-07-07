@@ -2,7 +2,6 @@ import * as React from "react";
 import "./NutritionPage.css";
 import Fridge from "../../assets/empty-fridge.jpg";
 import { useState } from "react";
-import axios from "axios";
 
 const categoryOptions = [
   { key: 1, label: "Select a category", value: "select" },

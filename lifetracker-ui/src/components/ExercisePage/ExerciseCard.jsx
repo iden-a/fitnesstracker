@@ -6,7 +6,7 @@ export default function ExerciseCard ({exercise}) {
 
     return (
         <> 
-        <div className="exercise-results">
+    <div className="exercise-results">
       <p> {exercise.name} </p> 
       <p> {exercise.category}  </p> 
       <p>{exercise.duration} </p>

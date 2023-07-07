@@ -8,11 +8,11 @@ const security = require("../middleware/security")
 const router = express.Router()
 
 router.post("/me", async function (req, res, next) {
-  // console.log('in /me ')
   try {
     const { email } = req.body;
     const user = await User.fetchUserByEmail(email)
-    return res.status(200).json({ user })
+    const exercise = await User.allExercise(user.id);
+    return res.status(200).json({ user, exercise })
   } catch (err) {
     next(err)
   }
@@ -46,16 +46,6 @@ router.post("/exercise", async function (req, res, next) {
     next(err)
   }
 })
-
-// router.get("/exercise", async function (req, res, next) {
-//   try {
-//     console.log(res)
-//     const exercise = await User.allExercise(res.locals.user.id)
-//     return res.status(200).json({ exercise })
-//   } catch (err) {
-//     next(err)
-//   }
-// })
 
 router.post("/nutrition", async function (req, res, next) {
   try {

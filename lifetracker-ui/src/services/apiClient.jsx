@@ -51,7 +51,7 @@ class ApiClient {
   }
 
   async fetchUserByEmail(email) {
-    console.log("heyyyyy! i'm in login")
+    console.log("heyyyyy! i'm in login");
     return await this.request({
       endpoint: `auth/me`,
       method: `POST`,
@@ -66,14 +66,6 @@ class ApiClient {
       data: creds,
     });
   }
-
-  // async allExercise() {
-  //   return await this.request({
-  //     endpoint: `auth/exercise`,
-  //     method: `GET`
-  //     // data: creds,
-  //   });
-  // }
 
   async nutrition(creds) {
     return await this.request({

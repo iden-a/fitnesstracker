@@ -1,7 +1,6 @@
 import * as React from "react";
 import "./Signin.css";
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../services/apiClient";
 
@@ -55,6 +54,7 @@ export default function Signin({ setAppState, setIsLoggedIn }) {
         setIsLoading(false);
         return;
       }
+      console.log(data)
       if (data) {
         setErrors("");
         setAppState((prevState) => ({
@@ -78,38 +78,6 @@ export default function Signin({ setAppState, setIsLoggedIn }) {
         form: message ? String(message) : String(err),
       }));
     }
-
-    // try {
-    //   const res = await axios.post(`http://localhost:3001/auth/login`, {
-    //     email: userInfo.email,
-    //     password: userInfo.password,
-    //   });
-
-    //   console.log(res);
-    //   if (res?.data?.user) {
-    //   localStorage.setItem('lifeTrackerToken', res.data.token)
-    //     setAppState((prevState) => ({
-    //       ...prevState,
-    //       user: res.data.user,
-    //       isAuthenticated: true
-    //     }));
-    //     setIsLoading(false);
-    //     navigate("/");
-    //   } else {
-    //     setErrors((e) => ({
-    //       ...e,
-    //       form: "Something went wrong with logging in",
-    //     }));
-    //     setIsLoading(false);
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    //   const message = "Incorrect password, try again."
-    //   setErrors((e) => ({
-    //     ...e,
-    //     form: message ? String(message) : String(err),
-    //   }));
-    // }
 
   };
   return (
