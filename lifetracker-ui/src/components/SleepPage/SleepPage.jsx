@@ -24,6 +24,7 @@ export default function SleepPage({ appState, setAppState }) {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+    console.log('help')
     setIsLoading(true);
     setErrors((e) => ({ ...e, form: null }));
     if (sleepInfo.name && sleepInfo.category && sleepInfo.duration && sleepInfo.intensity) {
@@ -34,6 +35,7 @@ export default function SleepPage({ appState, setAppState }) {
         const { data, error, message } = await apiClient.sleep({
           start_time: sleepInfo.start_time,
           end_time: sleepInfo.end_time,
+          user_id: appState.user.id
         });
     
         console.log(data);
@@ -125,7 +127,7 @@ export default function SleepPage({ appState, setAppState }) {
               <label htmlFor="end_time"> End Time * </label>
               <input type="datetime-local" name="end_time" value={sleepInfo.end_time} onChange={handleOnInputChange}/>
             </div>
-            <button onClick={handleOnSubmit} id="save-btn">Save</button>
+            <button onClick={handleOnSubmit}  id="save-btn">Save</button>
           </div>
 
             ) : (

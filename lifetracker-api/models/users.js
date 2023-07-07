@@ -212,10 +212,53 @@ class User {
     const user = result.rows[0]
 
     return user
+
   }
+  
+  static async allExercise (id) {
+      const exercise = await db.query (
+        `SELECT name,
+        duration, 
+        intensity, 
+        created_at
+           FROM exercise
+           WHERE user_id = $1
+           ORDER BY created_at DESC`
+           [id]``
+      );
 
+      const allExercise = result.rows
 
+      return allExercise 
 
+    }
+  // static async allNutrition (creds) {
+    //   const { user_id, name, category, quantity, calories, image_url} = creds
+    
+  //   const result = await db.query(
+  //     `INSERT INTO nutrition (
+  //         user_id,
+  //         name, 
+  //         category, 
+  //         quantity, 
+  //         calories,
+  //         image_url
+  //       )
+  //       VALUES ($1, $2, $3, $4, $5, $6)
+  //       RETURNING name,
+  //                 category,
+  //                 quantity,
+  //                 calories,
+  //                 image_url 
+  //                 `,
+  //     [user_id,name, category, quantity, calories, image_url]
+  //   )
+
+  //   const nutrition = result.rows[0]
+
+  //   return nutrition
+  // }
+ 
 
 
 }

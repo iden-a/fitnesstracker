@@ -1,8 +1,10 @@
 import * as React from "react";
 import "./ExercisePage.css";
 import Bike from "../../assets/bikepath.jpg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import apiClient from "../../services/apiClient";
+import ExerciseCard from "./ExerciseCard";
 
 const categoryOptions = [
   { key: 1, label: "Select a category", value: "select" },
@@ -17,6 +19,7 @@ export default function ExercisePage({ appState, setAppState }) {
   const [exerForm, setExerForm] = useState(false);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState({});
+  const [exerList, setExerList] = useState([]);
   const [exerInfo, setExerInfo] = useState({
     name: "",
     category: "Select a category",
@@ -24,8 +27,13 @@ export default function ExercisePage({ appState, setAppState }) {
     intensity: 0,
   });
 
-
-
+  useEffect(() => {
+    const allExercise = async () => {
+      const exerList = await apiClient.allExercise();
+      setExerList(exerList);
+    };
+    allExercise();
+  }, []);
 
   const handleOnInputChange = (e) => {
     setExerInfo({ ...exerInfo, [e.target.name]: e.target.value });
@@ -33,34 +41,37 @@ export default function ExercisePage({ appState, setAppState }) {
   console.log(exerInfo);
 
   const handleExercise = (event) => {
-    event.preventDefault()
-    setExerForm(true)
+    event.preventDefault();
+    setExerForm(true);
     setErrors((e) => ({ ...e, form: null }));
-
-  }
-
+  };
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setErrors((e) => ({ ...e, form: null }));
-    if (exerInfo.name && exerInfo.category && exerInfo.duration && exerInfo.intensity) {
-
+    if (
+      exerInfo.name &&
+      exerInfo.category &&
+      exerInfo.duration &&
+      exerInfo.intensity
+    ) {
       try {
         const token = localStorage.getItem("lifeTrackerToken");
         apiClient.setToken(token);
-        const { data, error, message } = await apiClient.sleep({
+        const { data, error, message } = await apiClient.exercise({
           name: exerInfo.name,
           category: exerInfo.category,
           duration: exerInfo.duration,
           intensity: exerInfo.intensity,
+          user_id: appState.user.id,
         });
-    
+
         console.log(data);
         if (error) {
           setErrors((e) => ({
             ...e,
-            form: "Something went wrong with logging in",
+            form: "Something went wrong.",
           }));
           setIsLoading(false);
           return;
@@ -71,13 +82,12 @@ export default function ExercisePage({ appState, setAppState }) {
             ...prevState,
             user: data.user,
             isAuthenticated: true,
-      
           }));
-          localStorage.setItem("lifeTrackerToken", data.token)
-          apiClient.setToken(data.token)
-          navigate("/")
+          localStorage.setItem("lifeTrackerToken", data.token);
+          apiClient.setToken(data.token);
+          navigate("/");
         } else {
-          setErrors("Something went wrong with logging in.")
+          setErrors("Something went wrong.");
         }
       } catch (err) {
         console.log(err);
@@ -88,9 +98,9 @@ export default function ExercisePage({ appState, setAppState }) {
         }));
       }
 
-    setExerForm(false)
+      setExerForm(false);
+    }
   };
-}
 
   return (
     <>
@@ -100,7 +110,7 @@ export default function ExercisePage({ appState, setAppState }) {
             <div className="exer-banner">
               <h1 id="banner-title"> Exercise </h1>
             </div>
-            
+
             {exerForm ? (
               <div className="record-form">
                 <div className="input-form">
@@ -113,7 +123,6 @@ export default function ExercisePage({ appState, setAppState }) {
                     placeholder="Name"
                     required
                   />
-                  
                 </div>
 
                 <div className="input-form">
@@ -158,17 +167,31 @@ export default function ExercisePage({ appState, setAppState }) {
                   Save
                 </button>
                 {errors.form && (
-            <span className="error" style={{paddingLeft:'20px', color:'red', fontWeight:'bold'}}>{errors.form}</span>
-          )}
+                  <span
+                    className="error"
+                    style={{
+                      paddingLeft: "20px",
+                      color: "red",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {errors.form}
+                  </span>
+                )}
               </div>
             ) : (
               <div className="exercise-auth">
                 <h1>Nothing here yet.</h1>
-                <button id="exercise-btn" onClick={handleExercise}>Add Exercise</button>
+                <button id="exercise-btn" onClick={handleExercise}>
+                  Add Exercise
+                </button>
                 <img src={Bike} alt="bike path for exercise" />
               </div>
             )}
           </div>
+          {/* {exerList?.map(exerEntry => (
+        <ExerciseCard exerEntry={exerEntry} key={exerEntry.id} />
+      ))}  */}
         </>
       ) : (
         <h1 style={{ paddingLeft: "180px", fontSize: "40px" }}>

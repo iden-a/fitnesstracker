@@ -3,6 +3,7 @@ import "./Navbar.css";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import apiClient from "../../services/apiClient";
 
 
 export default function Navbar({ appState, setAppState, isLoading, setIsLoading, setIsLoggedIn }) {
@@ -12,6 +13,7 @@ export default function Navbar({ appState, setAppState, isLoading, setIsLoading,
     e.preventDefault();
     setAppState((appState) => ({ ...appState, isAuthenticated: false }))
     setIsLoggedIn(false)
+    apiClient.setToken(null)
     //setIsLoading((isLoading) => ({ ...isLoading, isAuthenticated: true }))
     navigate("/");
     console.log("anything")}

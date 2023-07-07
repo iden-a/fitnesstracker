@@ -8,7 +8,7 @@ const security = require("../middleware/security")
 const router = express.Router()
 
 router.post("/me", async function (req, res, next) {
-  console.log('in /me ')
+  // console.log('in /me ')
   try {
     const { email } = req.body;
     const user = await User.fetchUserByEmail(email)
@@ -42,6 +42,15 @@ router.post("/exercise", async function (req, res, next) {
   try {
     const exercise = await User.exercise(req.body)
     return res.status(201).json({ exercise })
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get("/exercise", async function (req, res, next) {
+  try {
+    const exercise = await User.allExercise(res.locals.user.id)
+    return res.status(200).json({ exercise })
   } catch (err) {
     next(err)
   }

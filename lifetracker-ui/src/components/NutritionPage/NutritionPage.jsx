@@ -41,19 +41,20 @@ export default function NutritionPage({ appState, setAppState }) {
       try {
         const token = localStorage.getItem("lifeTrackerToken");
         apiClient.setToken(token);
-        const { data, error, message } = await apiClient.sleep({
+        const { data, error, message } = await apiClient.nutrition({
           name: nutriInfo.name,
           category: nutriInfo.category,
           quantity: nutriInfo.quantity,
           calories: nutriInfo.calories,
           image_url: nutriInfo.image_url,
+          user_id: appState.user.id
         });
     
         console.log(data);
         if (error) {
           setErrors((e) => ({
             ...e,
-            form: "Something went wrong with logging in",
+            form: "Something went wrong",
           }));
           setIsLoading(false);
           return;
@@ -70,11 +71,11 @@ export default function NutritionPage({ appState, setAppState }) {
           apiClient.setToken(data.token)
           navigate("/")
         } else {
-          setErrors("Something went wrong with logging in.")
+          setErrors("Something went wrong.")
         }
       } catch (err) {
         console.log(err);
-        const message = "Something went wrong with logging in.";
+        const message = "Something went wrong.";
         setErrors((e) => ({
           ...e,
           form: message ? String(message) : String(err),
