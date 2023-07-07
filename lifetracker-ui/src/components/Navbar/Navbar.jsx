@@ -5,21 +5,15 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 
-export default function Navbar({ appState, setAppState }) {
+export default function Navbar({ appState, setAppState, isLoading, setIsLoading, setIsLoggedIn }) {
   const navigate = useNavigate();
 
   const handleOnSubmit =  (e) => {
     e.preventDefault();
-    setAppState({
-      user: {},
-      isAuthenticated: false,
-      nutrition: [],
-      sleep: [],
-      exercise: [],
-    });
+    setAppState((appState) => ({ ...appState, isAuthenticated: false }))
+    setIsLoggedIn(false)
+    //setIsLoading((isLoading) => ({ ...isLoading, isAuthenticated: true }))
     navigate("/");
-    // setIsLoading((isLoading) => ({isLoading, isAuthenticated: false}))
-   
     console.log("anything")}
 
 

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "../../services/apiClient";
 
 
-export default function Signin({ setAppState }) {
+export default function Signin({ setAppState, setIsLoggedIn }) {
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -61,8 +61,8 @@ export default function Signin({ setAppState }) {
           ...prevState,
           user: data.user,
           isAuthenticated: true,
-    
         }));
+        setIsLoggedIn(true)
         localStorage.setItem("lifeTrackerToken", data.token)
         apiClient.setToken(data.token)
         navigate("/")

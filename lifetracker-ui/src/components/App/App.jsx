@@ -16,7 +16,8 @@ import jwtDecode from "jwt-decode"
 
 export default function App() {
 
-  // const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
   const [appState, setAppState] = useState({
     user: {},
@@ -39,7 +40,7 @@ useEffect (() => {
     console.log("USER: ");
     console.log(user);
 
-    if (appState.isAuthenticated) {
+    if (isLoggedIn) {
       user = user.data.user
       // repopulate state
       setAppState((prevState) => ({
@@ -69,12 +70,12 @@ useEffect (() => {
 [appState.isAuthenticated])
 
 
-console.log(appState)
+console.log('hello',appState)
   return (
     <>
       <div className="app">
         <BrowserRouter>
-          <Navbar appState={appState} setAppState={setAppState}/>
+          <Navbar appState={appState} setAppState={setAppState} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setIsLoading={setIsLoading}/>
           <Routes>
             <Route path="/" element={<Home  appState={appState}/>} />
             <Route
@@ -95,11 +96,11 @@ console.log(appState)
             />
             <Route
               path="/register"
-              element={<Register setAppState={setAppState} />}
+              element={<Register setAppState={setAppState} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>}
             />
             <Route
               path="/signin"
-              element={<Signin setAppState={setAppState} />}
+              element={<Signin setAppState={setAppState} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>}
             />
           </Routes>
         </BrowserRouter>
