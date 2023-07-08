@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../services/apiClient";
 
-
 export default function Signin({ setAppState, setIsLoggedIn }) {
   const [userInfo, setUserInfo] = useState({
     email: "",
@@ -14,7 +13,6 @@ export default function Signin({ setAppState, setIsLoggedIn }) {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
 
   const handleOnInputChange = (event) => {
     if (event.target.name === "email") {
@@ -54,7 +52,7 @@ export default function Signin({ setAppState, setIsLoggedIn }) {
         setIsLoading(false);
         return;
       }
-      console.log(data)
+      console.log(data);
       if (data) {
         setErrors("");
         setAppState((prevState) => ({
@@ -63,12 +61,12 @@ export default function Signin({ setAppState, setIsLoggedIn }) {
           exercise: data.exercise,
           isAuthenticated: true,
         }));
-        setIsLoggedIn(true)
-        localStorage.setItem("lifeTrackerToken", data.token)
-        apiClient.setToken(data.token)
-        navigate("/")
+        setIsLoggedIn(true);
+        localStorage.setItem("lifeTrackerToken", data.token);
+        apiClient.setToken(data.token);
+        navigate("/");
       } else {
-        setErrors("Something went wrong with logging in.")
+        setErrors("Something went wrong with logging in.");
       }
     } catch (err) {
       console.log(err);
@@ -78,7 +76,6 @@ export default function Signin({ setAppState, setIsLoggedIn }) {
         form: message ? String(message) : String(err),
       }));
     }
-
   };
   return (
     <>
@@ -95,7 +92,14 @@ export default function Signin({ setAppState, setIsLoggedIn }) {
             name="email"
             placeholder="Email"
           />
-          {errors.email && <span className="error" style={{paddingLeft:'20px', color:'red', fontWeight:'bold'}}>{errors.email}</span>}
+          {errors.email && (
+            <span
+              className="error"
+              style={{ paddingLeft: "20px", color: "red", fontWeight: "bold" }}
+            >
+              {errors.email}
+            </span>
+          )}
         </div>
         <div className="input-field">
           <label htmlFor="password"></label>
@@ -114,7 +118,12 @@ export default function Signin({ setAppState, setIsLoggedIn }) {
             placeholder="Password"
           />
           {errors.form && (
-            <span className="error" style={{paddingLeft:'20px', color:'red', fontWeight:'bold'}}>{errors.form}</span>
+            <span
+              className="error"
+              style={{ paddingLeft: "20px", color: "red", fontWeight: "bold" }}
+            >
+              {errors.form}
+            </span>
           )}
         </div>
         <button id="login-btn" onClick={handleOnSubmit}>
@@ -127,3 +136,4 @@ export default function Signin({ setAppState, setIsLoggedIn }) {
     </>
   );
 }
+

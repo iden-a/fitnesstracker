@@ -1,65 +1,46 @@
 .activity-title {
-    color: black;
-    /* text-align: center; */
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-}
-#title{
-    /* padding-right: 1015px; */
+  color: black;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
 }
 
-#feed-name{
-    text-align: center;
+#feed-name {
+  text-align: center;
 }
 
-.activity-feed{
-    display: flex;
+.activity-feed {
+  display: flex;
+  text-align: center;
+  margin-left: 190px;
+  width: 1900px;
+  height: 1900px;
 }
 
-/* #6CB4EE */
-#act-btn{
-    border-radius: 10px;
-    width: 100;
-    height: 50px;
-    background-color: #0066b2;
-    color: white;
-    border: none;
-    font-size: 15px;
-    justify-content: center;
-    margin-left: 20px;
+#act-btn {
+  border-radius: 10px;
+  width: 100;
+  height: 50px;
+  background-color: #0066b2;
+  color: white;
+  border: none;
+  font-size: 15px;
+  justify-content: center;
+  margin-left: 20px;
 }
 
-.exercise, .sleep, .calories, .stats {
-    width: 30%;
-    height: 300px;
-    /* display: flex; */
-    /* display: inline-block; */
-    margin-top: 20px;
-    justify-content: space-between;
-    margin-left: 50px;
-    border-radius: 10px;
-    /* background-color: transparent; */
-    border: solid 1px black;
-    background-color: #6CB4EE;
+.exercise,
+.stats {
+  width: 30%;
+  height: 300px;
+  margin-top: 20px;
+  margin-left: 50px;
+  border-radius: 10px;
+  border: solid 1px black;
+  background-color: #6cb4ee;
 }
-
-.calories, .stats {
-    width: 30%;
-    height: 300px;
-    /* display: inline-block; */
-    margin-top: 20px;
-    justify-content: space-between;
-    margin-left: 50px;
-    border-radius: 10px;
-    /* background-color: transparent; */
-    border: solid 1px black;
-    background-color: #6CB4EE;
-    display: inline-block;
-}
-
 
 .stats {
-    background-color: transparent;
-    border: solid 1px black;
+  background-color: transparent;
+  border: solid 1px black;
 }

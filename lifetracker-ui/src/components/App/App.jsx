@@ -35,8 +35,8 @@ export default function App() {
       const { email } = decodedToken;
       let user = await apiClient.fetchUserByEmail({ email: email });
       console.log("USER: ");
-      console.log( "look for me here", user);
-      console.log("now this!!!", user.data.exercise )
+      console.log("look for me here", user);
+      console.log("now this!!!", user.data.exercise);
 
       if (isLoggedIn) {
         const userInfo = user.data.user;
@@ -126,3 +126,4 @@ export default function App() {
     </>
   );
 }
+

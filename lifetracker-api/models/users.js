@@ -41,6 +41,7 @@ class User {
 
     const user = await User.fetchUserByEmail(email)
     const exercise = await User.allExercise(user.id)
+    const {totalExercise, avgIntensity} = await User.exerciseStats(user.id)
 
     if (user) {
       // compare hashed password to a new hash from password
@@ -235,35 +236,37 @@ class User {
       return allExercise 
 
     }
-  // static async allNutrition (creds) {
-    //   const { user_id, name, category, quantity, calories, image_url} = creds
-    
-  //   const result = await db.query(
-  //     `INSERT INTO nutrition (
-  //         user_id,
-  //         name, 
-  //         category, 
-  //         quantity, 
-  //         calories,
-  //         image_url
-  //       )
-  //       VALUES ($1, $2, $3, $4, $5, $6)
-  //       RETURNING name,
-  //                 category,
-  //                 quantity,
-  //                 calories,
-  //                 image_url 
-  //                 `,
-  //     [user_id,name, category, quantity, calories, image_url]
-  //   )
 
-  //   const nutrition = result.rows[0]
+    static async exerciseStats (idInfo) {
+     const {id} = idInfo;
+    const totalExerciseMin = await db.query(
+        `SELECT SUM(duration) AS total_exercise_minutes
+         FROM exercise 
+         WHERE user_id = $1 `,
+           [id]
+      );
 
-  //   return nutrition
-  // }
- 
+      let totalExercise;
+      if (totalExerciseMin.rows[0].total_exercise_minutes === null ) {
+        totalExercise = 0;
+      } else {
+        totalExercise = totalExerciseMin.rows[0].total_exercise_minutes;
+      } 
 
+      const avgExerciseIntens = await db.query (
+        `SELECT AVG(intensity) as avg_exercise_intensity
+        FROM exercise
+        WHERE user_id =$1`,
+        [id]
+        );
 
+        let avgIntensity;
+        if (avgExerciseIntens.rows[0].avg_exercise_intensity === null ) {
+          avgIntensity = 0;
+        } else {
+          avgIntensity = avgExerciseIntens.rows[0].avg_exercise_intensity;
+        } return {totalExercise:totalExercise, avgIntensity:avgIntensity};
+      }
 }
 
 module.exports = User

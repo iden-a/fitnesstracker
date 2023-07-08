@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./ExercisePage.css";
 import Bike from "../../assets/bikepath.jpg";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import apiClient from "../../services/apiClient";
 import ExerciseCard from "./ExerciseCard";
 
@@ -50,7 +50,7 @@ export default function ExercisePage({ appState, setAppState }) {
       try {
         const token = localStorage.getItem("lifeTrackerToken");
         apiClient.setToken(token);
-        const { data, error, message } = await apiClient.exercise({
+        const { data, error } = await apiClient.exercise({
           name: exerInfo.name,
           category: exerInfo.category,
           duration: exerInfo.duration,
@@ -182,7 +182,7 @@ export default function ExercisePage({ appState, setAppState }) {
                   </div>
                 ) : (
                   <>
-                  <button id="exercise-entry-btn" onClick={handleExercise}>
+                    <button id="exercise-entry-btn" onClick={handleExercise}>
                       Add Exercise
                     </button>
                     {appState.exercise?.map((exercise) => (
