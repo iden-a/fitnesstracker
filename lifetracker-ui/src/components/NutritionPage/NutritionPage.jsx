@@ -104,7 +104,6 @@ export default function NutritionPage({ appState, setAppState }) {
                     onChange={handleOnInputChange}
                     placeholder="Name"
                   />
-                  {/* {errors.name && <span className="error">{errors.name}</span>} */}
                 </div>
 
                 <div className="input-form">
@@ -124,7 +123,6 @@ export default function NutritionPage({ appState, setAppState }) {
                       </option>
                     ))}
                   </select>
-                  {/* {errors.category && <span className="error">{errors.category}</span>} */}
                 </div>
 
                 <div className="input-form">
@@ -134,9 +132,7 @@ export default function NutritionPage({ appState, setAppState }) {
                     name="quantity"
                     value={nutriInfo.quantity}
                     onChange={handleOnInputChange}
-                    // required
                   />
-              {/* {errors.quantity && <span className="error">{errors.quantity}</span>} */}
 
                 </div>
 
@@ -147,9 +143,7 @@ export default function NutritionPage({ appState, setAppState }) {
                     name="calories"
                     value={nutriInfo.calories}
                     onChange={handleOnInputChange}
-                    // required
                   />
-                {/* {errors.calories && <span className="error">{errors.calories}</span>} */}
 
                 </div>
                 <div className="input-form">
@@ -160,9 +154,7 @@ export default function NutritionPage({ appState, setAppState }) {
                     value={nutriInfo.image_url}
                     onChange={handleOnInputChange}
                     placeholder="url for image"
-                    // required
                   />
-            {/* {errors.image_url && <span className="error">{errors.image_url}</span>} */}
 
                 </div>
                 <button onClick={handleOnSubmit}>Save</button>

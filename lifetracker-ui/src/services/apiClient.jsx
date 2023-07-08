@@ -1,5 +1,4 @@
 import axios from "axios";
-// import jwtDecode
 
 class ApiClient {
   constructor(remoteHostUrl) {

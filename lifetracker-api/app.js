@@ -1,7 +1,6 @@
 const express = require ('express')
 const cors = require ('cors')
 const morgan = require ('morgan')
-// const bcrypt = require ('bcrypt')
 const authRoutes = require("./routes/auth")
 const security = require("./middleware/security")
 
@@ -25,15 +24,6 @@ app.get('/', (req, res) => {
 app.post('/register', (req, res) => {
     res.send({name: 'iden'})
 })
-
-
-
-//ROUTES
-
-
-//Register a user , create a user 
-
-//Allow a user to log in
 
 
 

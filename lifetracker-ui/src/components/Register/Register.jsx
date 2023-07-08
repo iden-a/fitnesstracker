@@ -111,42 +111,7 @@ export default function Register({ setAppState }) {
       }));
     }
   }
-    // try {
-    //   const res = await axios.post(`http://localhost:3001//auth/register`, {
-    //     email: userInfo.email,
-    //     username: userInfo.username,
-    //     first_name: userInfo.first_name,
-    //     last_name: userInfo.last_name,
-    //     password: userInfo.password,
-    //   });
-
-    //   console.log(res);
-    //   if (res?.data?.user) {
-    //     localStorage.setItem('lifeTrackerToken', res.data.token)
-    //     setAppState((prevState) => ({
-    //       ...prevState,
-    //       user: res.data.user,
-    //       isAuthenticated: true,
-
-    //     }));
-    //     setIsLoading(false);
-    //     navigate("/");
-    //   } else {
-    //     setErrors((e) => ({
-    //       ...e,
-    //       form: "Something went wrong with registration",
-    //     }));
-    //     setIsLoading(false);
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    //   const message =
-    //     "Something went wrong with registration";
-    //   setErrors((e) => ({
-    //     ...e,
-    //     form: message ? String(message) : String(err),
-    //   }));
-    // }
+   
   };
   return (
     <>

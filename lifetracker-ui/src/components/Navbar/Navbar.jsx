@@ -14,7 +14,6 @@ export default function Navbar({ appState, setAppState, isLoading, setIsLoading,
     setAppState((appState) => ({ ...appState, isAuthenticated: false }))
     setIsLoggedIn(false)
     apiClient.setToken(null)
-    //setIsLoading((isLoading) => ({ ...isLoading, isAuthenticated: true }))
     navigate("/");
     console.log("anything")}
 

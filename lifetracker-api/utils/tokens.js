@@ -1,11 +1,9 @@
 const jwt = require("jsonwebtoken")
 const { SECRET_KEY } = require("../config")
-// const { validateFields } = require("./validate")
 
 const generateToken = (data) => jwt.sign(data, SECRET_KEY, {expiresIn:'1hr'})
 
 const createUserJwt = (user) => {
-//   validateFields({ required: ["id", "email"], obj: user, location: "token generation" })
   const payload = {
     id: user.id,
     email: user.email

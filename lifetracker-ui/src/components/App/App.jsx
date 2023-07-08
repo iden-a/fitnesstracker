@@ -40,7 +40,6 @@ export default function App() {
 
       if (isLoggedIn) {
         const userInfo = user.data.user;
-        // repopulate state
         setAppState((prevState) => ({
           ...prevState,
           user: userInfo,

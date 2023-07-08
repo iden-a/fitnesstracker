@@ -70,37 +70,6 @@ export default function SleepPage({ appState, setAppState }) {
         }));
       }
 
-  // try {
-  //     const res = await axios.post(`http://localhost:3001/auth/sleep`, {
-  //       user_id: appState.user.id, 
-  //     start_time: sleepInfo.start_time, 
-  //       end_time: sleepInfo.end_time
-  //   });
-
-  //   console.log(res);
-  //   if(res?.data?.sleep) {
-  //     setAppState((prevState) => ({
-  //       ...prevState,
-  //       sleep:[res.data.sleep, ...prevState.sleep]
-  //     }));
-  //     console.log(res.data.sleep)
-  //   } else {
-  //     setErrors((e) => ({
-  //       ...e,
-  //       form: "Invalid input."
-  //     }))
-  //   } 
-  // } catch (err) {
-  //   console.log(err);
-  //   const message =
-  //     "Something went wrong with registration.";
-  //   setErrors((e) => ({
-  //     ...e,
-  //     form: message ? String(message) : String(err),
-  //   }));
-  // }
-  // setSleepForm(false)
-  // 
 }
   }
 
