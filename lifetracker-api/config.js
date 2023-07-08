@@ -15,7 +15,7 @@ function getDatabaseUri() {
   const dbName = process.env.PG_DATABASE || "lifetracker"
 
 
-  return process.env.DATABASE_URL || `postgresql://${dbUser}:${dbPass}@${dbHost}:${dbPort}/${dbName}`
+  return process.env.DATABASE_URL || `postgres://lifetrackerdb_dgdm_user:VaV93EL8w3e3Rixm3hEVdZGP5OkzoLiC@dpg-cikcj6tgkuvinfijs4q0-a/lifetrackerdb_dgdm`
 }
 
 const BCRYPT_WORK_FACTOR =  13
