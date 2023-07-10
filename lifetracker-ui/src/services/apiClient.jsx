@@ -3,7 +3,8 @@ import axios from "axios";
 class ApiClient {
   constructor(remoteHostUrl) {
     this.token = null;
-    this.remoteHostUrl = remoteHostUrl || "https://lifetrackerbackend.onrender.com";
+    this.remoteHostUrl =
+      remoteHostUrl || "https://lifetrackerbackend.onrender.com";
   }
 
   setToken(token) {
@@ -50,7 +51,6 @@ class ApiClient {
   }
 
   async fetchUserByEmail(email) {
-    console.log("heyyyyy! i'm in login");
     return await this.request({
       endpoint: `auth/me`,
       method: `POST`,

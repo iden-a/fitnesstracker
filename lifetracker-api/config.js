@@ -2,7 +2,7 @@ require("dotenv").config()
 require("colors")
 
 
-const PORT = process.env.PORT ? Number(process.env.PORT) : 3001
+const PORT = process.env.PG_PORT ? Number(process.env.PG_PORT) : 3001
 const SECRET_KEY = process.env.SECRET_KEY ||  "secret-dev"
 
 
@@ -15,7 +15,7 @@ function getDatabaseUri() {
   const dbName = process.env.PG_DATABASE || "lifetracker"
 
 
-  return process.env.DATABASE_URL || `postgres://lifetrackerdb_dgdm_user:VaV93EL8w3e3Rixm3hEVdZGP5OkzoLiC@dpg-cikcj6tgkuvinfijs4q0-a/lifetrackerdb_dgdm`
+  return process.env.PG_URL || `postgres://${dbUser}:${dbPass}:${dbHost}:${dbPort}/${dbName}`
 }
 
 const BCRYPT_WORK_FACTOR =  13
