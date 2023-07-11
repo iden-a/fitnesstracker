@@ -5,18 +5,21 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../services/apiClient";
 
-
-export default function Navbar({ appState, setAppState, isLoading, setIsLoading, setIsLoggedIn }) {
+export default function Navbar({
+  appState,
+  setAppState,
+  setIsLoggedIn,
+}) {
   const navigate = useNavigate();
 
-  const handleOnSubmit =  (e) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
-    setAppState((appState) => ({ ...appState, isAuthenticated: false }))
-    setIsLoggedIn(false)
-    apiClient.setToken(null)
+    setAppState((appState) => ({ ...appState, isAuthenticated: false }));
+    setIsLoggedIn(false);
+    apiClient.setToken(null);
     navigate("/");
-    console.log("anything")}
-
+    console.log("anything");
+  };
 
   return (
     <>
@@ -46,7 +49,9 @@ export default function Navbar({ appState, setAppState, isLoading, setIsLoading,
             {appState.isAuthenticated ? (
               <li>
                 <Link to="/signout">
-                  <button id="signout" onClick={handleOnSubmit}>Sign Out</button>
+                  <button id="signout" onClick={handleOnSubmit}>
+                    Sign Out
+                  </button>
                 </Link>
               </li>
             ) : (

@@ -34,9 +34,12 @@ export default function NutritionPage({ appState, setAppState }) {
     event.preventDefault();
     setIsLoading(true);
     setErrors((e) => ({ ...e, form: null }));
-    if (nutriInfo.name && nutriInfo.category && nutriInfo.quantity && nutriInfo.calories) {
-
-
+    if (
+      nutriInfo.name &&
+      nutriInfo.category &&
+      nutriInfo.quantity &&
+      nutriInfo.calories
+    ) {
       try {
         const token = localStorage.getItem("lifeTrackerToken");
         apiClient.setToken(token);
@@ -46,10 +49,9 @@ export default function NutritionPage({ appState, setAppState }) {
           quantity: nutriInfo.quantity,
           calories: nutriInfo.calories,
           image_url: nutriInfo.image_url,
-          user_id: appState.user.id
+          user_id: appState.user.id,
         });
-    
-        console.log(data);
+
         if (error) {
           setErrors((e) => ({
             ...e,
@@ -64,13 +66,12 @@ export default function NutritionPage({ appState, setAppState }) {
             ...prevState,
             user: data.user,
             isAuthenticated: true,
-      
           }));
-          localStorage.setItem("lifeTrackerToken", data.token)
-          apiClient.setToken(data.token)
-          navigate("/")
+          localStorage.setItem("lifeTrackerToken", data.token);
+          apiClient.setToken(data.token);
+          navigate("/");
         } else {
-          setErrors("Something went wrong.")
+          setErrors("Something went wrong.");
         }
       } catch (err) {
         console.log(err);
@@ -81,9 +82,9 @@ export default function NutritionPage({ appState, setAppState }) {
         }));
       }
 
-    setNutriForm(false);
+      setNutriForm(false);
+    }
   };
-}
 
   return (
     <>
@@ -133,7 +134,6 @@ export default function NutritionPage({ appState, setAppState }) {
                     value={nutriInfo.quantity}
                     onChange={handleOnInputChange}
                   />
-
                 </div>
 
                 <div className="input-form">
@@ -144,7 +144,6 @@ export default function NutritionPage({ appState, setAppState }) {
                     value={nutriInfo.calories}
                     onChange={handleOnInputChange}
                   />
-
                 </div>
                 <div className="input-form">
                   <label htmlFor="image_url"></label>
@@ -155,7 +154,6 @@ export default function NutritionPage({ appState, setAppState }) {
                     onChange={handleOnInputChange}
                     placeholder="url for image"
                   />
-
                 </div>
                 <button onClick={handleOnSubmit}>Save</button>
               </div>

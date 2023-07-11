@@ -16,12 +16,9 @@ export default function Signin({ setAppState, setIsLoggedIn }) {
 
   const handleOnInputChange = (event) => {
     if (event.target.name === "email") {
-      console.log("yes");
       if (event.target.value.indexOf("@") === -1) {
-        console.log("no");
         setErrors((e) => ({ ...e, email: "Please enter a valid email." }));
       } else {
-        console.log("mee");
         setErrors((e) => ({ ...e, email: null }));
       }
     }
@@ -43,7 +40,6 @@ export default function Signin({ setAppState, setIsLoggedIn }) {
         email: userInfo.email,
         password: userInfo.password,
       });
-      console.log(data);
       if (error) {
         setErrors((e) => ({
           ...e,
@@ -52,7 +48,6 @@ export default function Signin({ setAppState, setIsLoggedIn }) {
         setIsLoading(false);
         return;
       }
-      console.log(data);
       if (data) {
         setErrors("");
         setAppState((prevState) => ({
@@ -136,4 +131,3 @@ export default function Signin({ setAppState, setIsLoggedIn }) {
     </>
   );
 }
-

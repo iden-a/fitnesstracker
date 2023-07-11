@@ -38,6 +38,8 @@ By the end of this project you will be able to...
   - [X] Each activity tracked is given a unique ID for easy lookup.
 - [X] Deploy your website with Render. Check out our [Render Deployment Guide](https://courses.codepath.org/snippets/site/render_deployment_guide) for detailed instructions.
 
+Link: https://lifetrackerfrontend-2eu7.onrender.com/ 
+
 ### Stretch Features
 
 Implement any of the following features to improve the application:

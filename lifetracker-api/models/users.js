@@ -40,7 +40,7 @@ class User {
 
     const user = await User.fetchUserByEmail(email)
     const exercise = await User.allExercise(user.id)
-    const {totalExercise, avgIntensity} = await User.exerciseStats(user.id)
+    // const {totalExercise, avgIntensity} = await User.exerciseStats(user.id)
 
     if (user) {
       // compare hashed password to a new hash from password

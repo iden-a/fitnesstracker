@@ -5,7 +5,7 @@ const authRoutes = require("./routes/auth")
 const security = require("./middleware/security")
 
 
-const pool = require('./database')
+// const pool = require('./database')
 
 const app = express ()
 

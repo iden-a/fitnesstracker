@@ -20,7 +20,6 @@ export default function Register({ setAppState }) {
 
   const handleOnInputChange = (event) => {
     if (event.target.name === "password") {
-      console.log("yes");
       if (
         userInfo.confirmpassword &&
         userInfo.confirmpassword !== event.target.value
@@ -32,10 +31,8 @@ export default function Register({ setAppState }) {
     }
     if (event.target.name === "confirmpassword") {
       if (userInfo.password && userInfo.password !== event.target.value) {
-        console.log("no");
         setErrors((e) => ({ ...e, confirmPassword: "Passwords do not match" }));
       } else {
-        console.log("two");
         setErrors((e) => ({ ...e, confirmPassword: null }));
       }
     }
@@ -56,62 +53,65 @@ export default function Register({ setAppState }) {
   const handleOnSubmit = async () => {
     setIsLoading(true);
     setErrors((e) => ({ ...e, form: null }));
-    if (userInfo.email && userInfo.username && userInfo.first_name && userInfo.last_name, userInfo.passwordConfirm, userInfo.confirmpassword) {
-
-
-    console.log("anything");
-
-    if (userInfo.confirmpassword !== userInfo.password) {
-      setErrors((e) => ({ ...e, passwordConfirm: "Passwords do not match." }));
-      setIsLoading(false);
-      return;
-    } else {
-      setErrors((e) => ({ ...e, passwordConfirm: null }));
-    }
-
-    try {
-      const token = apiClient.fetchUserByToken;
-      apiClient.setToken(token);
-      const { data, error, message } = await apiClient.register({
-        email: userInfo.email,
-        username: userInfo.username,
-        first_name: userInfo.first_name,
-        last_name: userInfo.last_name,
-        password: userInfo.password,
-      });
-      console.log(data);
-      if (error) {
+    if (
+      (userInfo.email &&
+        userInfo.username &&
+        userInfo.first_name &&
+        userInfo.last_name,
+      userInfo.passwordConfirm,
+      userInfo.confirmpassword)
+    ) {
+      if (userInfo.confirmpassword !== userInfo.password) {
         setErrors((e) => ({
           ...e,
-          form: "Something went wrong with registration",
+          passwordConfirm: "Passwords do not match.",
         }));
         setIsLoading(false);
         return;
-      }
-      if (data) {
-        setErrors("");
-        setAppState((prevState) => ({
-          ...prevState,
-          user: data.user,
-          isAuthenticated: true,
-         
-        }));
-        localStorage.setItem("lifeTrackerToken", data.token)
-        apiClient.setToken(data.token)
-        navigate("/")
       } else {
-        setErrors("Something went wrong with registration")
+        setErrors((e) => ({ ...e, passwordConfirm: null }));
       }
-    } catch (err) {
-      console.log(err);
-      const message = "Something went wrong with registration";
-      setErrors((e) => ({
-        ...e,
-        form: message ? String(message) : String(err),
-      }));
+
+      try {
+        const token = apiClient.fetchUserByToken;
+        apiClient.setToken(token);
+        const { data, error, message } = await apiClient.register({
+          email: userInfo.email,
+          username: userInfo.username,
+          first_name: userInfo.first_name,
+          last_name: userInfo.last_name,
+          password: userInfo.password,
+        });
+        if (error) {
+          setErrors((e) => ({
+            ...e,
+            form: "Something went wrong with registration",
+          }));
+          setIsLoading(false);
+          return;
+        }
+        if (data) {
+          setErrors("");
+          setAppState((prevState) => ({
+            ...prevState,
+            user: data.user,
+            isAuthenticated: true,
+          }));
+          localStorage.setItem("lifeTrackerToken", data.token);
+          apiClient.setToken(data.token);
+          navigate("/");
+        } else {
+          setErrors("Something went wrong with registration");
+        }
+      } catch (err) {
+        console.log(err);
+        const message = "Something went wrong with registration";
+        setErrors((e) => ({
+          ...e,
+          form: message ? String(message) : String(err),
+        }));
+      }
     }
-  }
-   
   };
   return (
     <>
@@ -193,13 +193,17 @@ export default function Register({ setAppState }) {
               placeholder="Password"
             />
             {errors.confirmPassword && (
-            <span
-              className="error"
-              style={{ paddingLeft: "20px", color: "red", fontWeight: "bold" }}
-            >
-              {errors.confirmPassword}
-            </span>
-          )}
+              <span
+                className="error"
+                style={{
+                  paddingLeft: "20px",
+                  color: "red",
+                  fontWeight: "bold",
+                }}
+              >
+                {errors.confirmPassword}
+              </span>
+            )}
           </span>
         </div>
 

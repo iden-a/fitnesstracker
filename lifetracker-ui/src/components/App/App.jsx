@@ -34,9 +34,6 @@ export default function App() {
       let decodedToken = jwtDecode(token);
       const { email } = decodedToken;
       let user = await apiClient.fetchUserByEmail({ email: email });
-      console.log("USER: ");
-      console.log("look for me here", user);
-      console.log("now this!!!", user.data.exercise);
 
       if (isLoggedIn) {
         const userInfo = user.data.user;
@@ -55,13 +52,10 @@ export default function App() {
           exercise: [],
         });
       }
-
-      console.log(appState);
     };
     fetchUser();
   }, [appState.isAuthenticated]);
 
-  console.log("hello", appState);
   return (
     <>
       <div className="app">
@@ -125,4 +119,3 @@ export default function App() {
     </>
   );
 }
-

@@ -6,42 +6,42 @@
 } */
 
 .home {
- justify-content: space-around;
+  justify-content: space-around;
   display: flex;
 }
 
 .homeauth {
   justify-content: space-around;
-   display: flex;
- }
+  display: flex;
+}
 
-.tiles{
+.tiles {
   display: flex;
   justify-content: space-around;
   padding: 90px;
 }
 
-.tracker img{
+.tracker img {
   border-radius: 20px;
   height: 400px;
   width: 600px;
 }
 
-.tile img{
- display: flex;
- height: 320px;
- width: 300px;
- object-fit:cover;
- border-radius: 40px;
- 
-} 
-.tile img:hover{
+.tile img {
+  display: flex;
+  height: 320px;
+  width: 300px;
+  object-fit: cover;
+  border-radius: 40px;
+}
+.tile img:hover {
   -moz-box-shadow: 0 0 10px blue;
   -webkit-box-shadow: 0 0 10px blue;
-  box-shadow: 0 0 10px blue;}
-     
-  .trackerauth img{
-    border-radius: 20px;
-    height: 400px;
-    width: 600px;
-  }
+  box-shadow: 0 0 10px blue;
+}
+
+.trackerauth img {
+  border-radius: 20px;
+  height: 400px;
+  width: 600px;
+}

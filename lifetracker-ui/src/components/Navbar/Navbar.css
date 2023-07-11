@@ -24,18 +24,15 @@ a {
   margin-left: 170px;
 }
 
-
-
-#signin, #register, #signout{
-border-radius: 10px;
-width: 100px;
-height: 35px;
-background-color:  #0066b2;
-border: none;
-font-size: 17px;
-color: aliceblue;
-margin-bottom: 5px;
-
+#signin,
+#register,
+#signout {
+  border-radius: 10px;
+  width: 100px;
+  height: 35px;
+  background-color: #0066b2;
+  border: none;
+  font-size: 17px;
+  color: aliceblue;
+  margin-bottom: 5px;
 }
-
-

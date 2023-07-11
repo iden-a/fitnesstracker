@@ -1,30 +1,25 @@
-
 .nut-banner {
-  /* background-color: white; */
   background-color: #0066b2;
   border: solid 1px darkblue;
-  color:white;
+  color: white;
   text-align: center;
   width: 101%;
-  /* margin-right: 40px; */
   height: 100px;
   font-size: 25px;
   padding-top: 80px;
-  
 }
 
-#nutrition-btn{
-border-radius: 10px;
-width: 310px;
-height: 40px;
-background-color:  #0066b2;
-border: none;
-font-size: 20px;
-color: aliceblue;
+#nutrition-btn {
+  border-radius: 10px;
+  width: 310px;
+  height: 40px;
+  background-color: #0066b2;
+  border: none;
+  font-size: 20px;
+  color: aliceblue;
 }
 
-.nutrition-auth{
-  /* background-color: white; */
+.nutrition-auth {
   text-align: center;
 }
 
@@ -32,20 +27,19 @@ color: aliceblue;
   display: flex;
   height: 350px;
   width: 350px;
-  object-fit:cover;
+  object-fit: cover;
   border-radius: 40px;
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.record-form{
+.record-form {
   width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background-color:#B9D9EB;
+  background-color: #b9d9eb;
   border-radius: 5px;
   border-color: red;
   border: solid 1px darkblue;
-
 }

@@ -29,7 +29,6 @@ export default function ExercisePage({ appState, setAppState }) {
   const handleOnInputChange = (e) => {
     setExerInfo({ ...exerInfo, [e.target.name]: e.target.value });
   };
-  console.log(exerInfo);
 
   const handleExercise = (event) => {
     event.preventDefault();
@@ -58,7 +57,6 @@ export default function ExercisePage({ appState, setAppState }) {
           user_id: appState.user.id,
         });
 
-        console.log(data);
         if (error) {
           setErrors((e) => ({
             ...e,
@@ -67,7 +65,6 @@ export default function ExercisePage({ appState, setAppState }) {
           setIsLoading(false);
           return;
         }
-        console.log("meeeeeee", data);
         if (data) {
           setErrors("");
           setAppState((prevState) => ({

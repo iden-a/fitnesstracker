@@ -47,6 +47,17 @@ router.post("/exercise", async function (req, res, next) {
   }
 })
 
+router.post("/exercisestats", async function (req, res, next) {
+  try {
+    const {user_id} = req.body
+    console.log("this is what we are looking for", user_id)
+    const exerciseStats = await User.exerciseStats(user_id)
+    return res.status(201).json({exerciseStats})
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post("/nutrition", async function (req, res, next) {
   try {
     const nutrition = await User.nutrition(req.body)
